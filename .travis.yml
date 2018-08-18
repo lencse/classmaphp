@@ -21,3 +21,6 @@ install:
 
 script:
     - composer test-all
+
+after_script:
+    - bash <(curl -s https://codecov.io/bash)
