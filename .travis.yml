@@ -25,7 +25,7 @@ before_install:
 install:
     - if [[ $DEPS == 'latest' ]]; then travis_retry composer update -n --prefer-dist; fi
     - if [[ $DEPS == 'lowest' ]]; then travis_retry composer update -n --prefer-lowest --prefer-stable; fi
-    - composer show
+    - stty cols 160 && composer show
 
 script:
     - composer test-all
