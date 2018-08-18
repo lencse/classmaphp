@@ -1,8 +1,5 @@
 # ClassmaPHP
 
-
-https://sonarcloud.io/api/project_badges/measure?project=classmaphp&metric=alert_status
-
 [![Build Status](https://travis-ci.org/lencse/classmaphp.svg?branch=master)](https://travis-ci.org/lencse/classmaphp)
 [![codecov](https://codecov.io/gh/lencse/classmaphp/branch/master/graph/badge.svg)](https://codecov.io/gh/lencse/classmaphp)
 [![StyleCI](https://github.styleci.io/repos/145257365/shield?branch=master)](https://github.styleci.io/repos/145257365)
