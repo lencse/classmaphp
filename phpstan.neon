@@ -1,0 +1,2 @@
+parameters:
+    bootstrap: vendor/autoload.php
