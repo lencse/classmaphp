@@ -33,6 +33,7 @@
         "vimeo/psalm": "^2.0.10"
     },
     "scripts": {
+        "init-dev": "./init-dev.sh",
         "test": "phpunit",
         "test-coverage": "phpunit --coverage-html logs/phpunit/coverage-report --coverage-clover logs/phpunit/clover.xml --coverage-text --log-junit logs/phpunit/test-report.xml --colors=always",
         "min-coverage": "ci-test-coverage --min-coverage 99 --clover-file logs/phpunit/clover.xml",
