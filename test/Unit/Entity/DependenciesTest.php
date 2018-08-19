@@ -3,7 +3,6 @@
 namespace Test\Unit\Entity;
 
 use Lencse\ClassMap\Entity\Dependencies;
-use Lencse\ClassMap\Entity\PSRNamespace;
 use Lencse\ClassMap\Entity\SubNamespace;
 use PHPUnit\Framework\TestCase;
 
