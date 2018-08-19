@@ -15,6 +15,7 @@ class PSRNamespaceList implements Iterator
     {
         $result = clone $this;
         $result->namespaces[] = $namespace;
+
         return $result;
     }
 
