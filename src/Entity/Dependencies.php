@@ -2,39 +2,30 @@
 
 namespace Lencse\ClassMap\Entity;
 
-class Dependencies
+final class Dependencies
 {
     /**
-     * @var PSRNamespace
+     * @var Dependency[]
      */
-    private $dependant;
+    private $data = [];
 
-    /**
-     * @var PSRNamespaceList
-     */
-    private $dependencies;
-
-    public function __construct(PSRNamespace $dependant)
-    {
-        $this->dependant = $dependant;
-        $this->dependencies = new PSRNamespaceList();
-    }
-
-    public function withDependency(PSRNamespace $dependency): self
+    public function applyDependency(Dependency $dependency): self
     {
         $result = clone $this;
-        $result->dependencies = $this->dependencies->add($dependency);
+        $result->data[] = $dependency;
 
         return $result;
     }
 
-    public function getDependant(): PSRNamespace
+    public function getDependenciesForNamespace(PSRNamespace $namespace): PSRNamespaceList
     {
-        return $this->dependant;
-    }
+        $result = new PSRNamespaceList();
+        foreach ($this->data as $dependency) {
+            if ($namespace === $dependency->getDependant()) {
+                $result = $result->add($dependency->getDependency());
+            }
+        }
 
-    public function getDependencies(): PSRNamespaceList
-    {
-        return $this->dependencies;
+        return $result;
     }
 }

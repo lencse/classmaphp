@@ -2,7 +2,7 @@
 
 namespace Lencse\ClassMap\Entity;
 
-class SubNamespace implements PSRNamespace
+final class SubNamespace implements PSRNamespace
 {
     /**
      * @var string

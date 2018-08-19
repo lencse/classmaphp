@@ -4,7 +4,7 @@ namespace Lencse\ClassMap\Entity;
 
 use Iterator;
 
-class PSRNamespaceList implements Iterator
+final class PSRNamespaceList implements Iterator
 {
     /**
      * @var PSRNamespace[]
