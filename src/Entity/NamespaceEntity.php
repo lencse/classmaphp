@@ -29,4 +29,10 @@ final class NamespaceEntity
     {
         return $this->id;
     }
+
+    public function same(self $other): bool
+    {
+        return $other->getId() === $this->getId()
+            && $other->getPackage()->same($this->getPackage());
+    }
 }

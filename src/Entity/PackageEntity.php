@@ -18,4 +18,9 @@ final class PackageEntity
     {
         return $this->id;
     }
+
+    public function same(self $other): bool
+    {
+        return $other->getId() === $this->getId();
+    }
 }

@@ -12,4 +12,18 @@ class PackageEntityTest extends TestCase
         $package = new PackageEntity('lencse/classmaphp');
         $this->assertEquals('lencse/classmaphp', $package->getId());
     }
+
+    public function testSamePackage()
+    {
+        $package1 = new PackageEntity('lencse/classmaphp');
+        $package2 = new PackageEntity('lencse/classmaphp');
+        $this->assertTrue($package1->same($package2));
+    }
+
+    public function testNonSamePackage()
+    {
+        $package1 = new PackageEntity('lencse/classmaphp');
+        $package2 = new PackageEntity('lencse/other');
+        $this->assertFalse($package1->same($package2));
+    }
 }

@@ -29,4 +29,10 @@ final class ClassEntity
     {
         return $this->name;
     }
+
+    public function same(self $other): bool
+    {
+        return $other->getName() === $this->getName()
+            && $other->getNamespace()->same($this->getNamespace());
+    }
 }
