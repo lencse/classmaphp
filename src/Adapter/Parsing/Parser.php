@@ -3,10 +3,12 @@
 namespace Lencse\ClassMap\Adapter\Parsing;
 
 use Lencse\ClassMap\Adapter\Parsing\Visitor\ClassNameVisitor;
+use Lencse\ClassMap\Adapter\Parsing\Visitor\DependencyVisitor;
 use Lencse\ClassMap\Adapter\Parsing\Visitor\NamespaceVisitor;
 use Lencse\ClassMap\Parsing\Parser as ParserInterface;
 use Lencse\ClassMap\Value\PHPClass;
 use Lencse\ClassMap\Value\PHPClassList;
+use Lencse\ClassMap\Value\StringList;
 use PhpParser\NodeTraverser;
 use PhpParser\ParserFactory;
 use PhpParser\Parser as PHPParser;
@@ -31,6 +33,8 @@ final class Parser implements ParserInterface
         $traverser->addVisitor($classNameVisitor);
         $namespaceVisitor = new NamespaceVisitor();
         $traverser->addVisitor($namespaceVisitor);
+        $dependencyVisitor = new DependencyVisitor();
+        $traverser->addVisitor($dependencyVisitor);
         if (empty($statements)) {
             return $classes;
         }
@@ -40,6 +44,12 @@ final class Parser implements ParserInterface
             return $classes;
         }
 
-        return $classes->add(new PHPClass($classNameVisitor->getClassName(), $namespaceVisitor->getNamespace()));
+        $class = new PHPClass(
+            $classNameVisitor->getClassName(),
+            $namespaceVisitor->getNamespace(),
+            $dependencyVisitor->getDependencies()
+        );
+
+        return $classes->add($class);
     }
 }

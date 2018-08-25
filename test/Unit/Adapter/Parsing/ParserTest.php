@@ -8,15 +8,29 @@ use Lencse\ClassMap\Adapter\Parsing\Parser;
 use Lencse\ClassMap\Value\NamespaceId;
 use Lencse\ClassMap\Value\PHPClass;
 use Lencse\ClassMap\Value\PHPClassList;
+use Lencse\ClassMap\Value\StringList;
 use PHPUnit\Framework\TestCase;
 
 class ParserTest extends TestCase
 {
-    public function testParsingClass()
+    public function testParsingClassWithoutDependencies()
     {
         $classes = $this->generateClassArrayFromFile('EventDispatcher.php');
         $this->assertEquals('EventDispatcher', $classes[0]->getName());
         $this->assertEquals('Symfony\\Component\\EventDispatcher', $classes[0]->getNamespace());
+        $this->assertEquals(new StringList(), $classes[0]->getDependencies());
+    }
+
+    public function testParsingClassWthDependencies()
+    {
+        $classes = $this->generateClassArrayFromFile('ExpressionLanguage.php');
+        $this->assertEquals('ExpressionLanguage', $classes[0]->getName());
+        $this->assertEquals('Symfony\\Component\\DependencyInjection', $classes[0]->getNamespace());
+        $expected = [
+            'Psr\\Cache\\CacheItemPoolInterface',
+            'Symfony\\Component\\ExpressionLanguage\\ExpressionLanguage',
+        ];
+        $this->assertEquals($expected, iterator_to_array($classes[0]->getDependencies()));
     }
 
     public function testParsingNonClasses()

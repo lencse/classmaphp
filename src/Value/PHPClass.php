@@ -14,10 +14,16 @@ final class PHPClass
      */
     private $namespace;
 
-    public function __construct(string $name, string $namespace)
+    /**
+     * @var StringList
+     */
+    private $dependencies;
+
+    public function __construct(string $name, string $namespace, StringList $dependencies)
     {
         $this->name = $name;
         $this->namespace = $namespace;
+        $this->dependencies = $dependencies;
     }
 
     public function getName(): string
@@ -28,5 +34,10 @@ final class PHPClass
     public function getNamespace(): string
     {
         return $this->namespace;
+    }
+
+    public function getDependencies(): StringList
+    {
+        return $this->dependencies;
     }
 }
