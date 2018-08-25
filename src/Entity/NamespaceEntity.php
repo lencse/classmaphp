@@ -14,10 +14,16 @@ final class NamespaceEntity
      */
     private $id;
 
+    /**
+     * @var ClassEntityList
+     */
+    private $subClasses;
+
     public function __construct(PackageEntity $package, string $id)
     {
         $this->package = $package;
         $this->id = $id;
+        $this->subClasses = new ClassEntityList();
     }
 
     public function getPackage(): PackageEntity
@@ -34,5 +40,17 @@ final class NamespaceEntity
     {
         return $other->getId() === $this->getId()
             && $other->getPackage()->same($this->getPackage());
+    }
+
+    public function addSubClass(ClassEntity $class): self
+    {
+        $this->subClasses = $this->subClasses->add($class);
+
+        return $this;
+    }
+
+    public function getSubClasses(): ClassEntityList
+    {
+        return $this->subClasses;
     }
 }

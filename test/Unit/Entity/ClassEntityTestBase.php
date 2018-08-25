@@ -35,13 +35,10 @@ abstract class ClassEntityTestBase extends TestCase
             new NamespaceEntity(new PackageEntity('lencse/classmaphp'), 'Test\\Entity'),
             new NamespaceEntity(new PackageEntity('lencse/classmaphp'), 'Test\\OtherNamespace'),
         ];
-        $this->classes = [
-            new ClassEntity($this->namespaces[0], $this->classNames[0]),
-            new ClassEntity($this->namespaces[0], $this->classNames[1]),
-            new ClassEntity($this->namespaces[0], $this->classNames[2]),
-            new ClassEntity($this->namespaces[1], $this->classNames[0]),
-            new ClassEntity($this->namespaces[1], $this->classNames[1]),
-            new ClassEntity($this->namespaces[1], $this->classNames[2]),
-        ];
+    }
+
+    protected function createClass(int $namespaceIdx, int $nameIdx): ClassEntity
+    {
+        return new ClassEntity($this->namespaces[$namespaceIdx], $this->classNames[$nameIdx]);
     }
 }

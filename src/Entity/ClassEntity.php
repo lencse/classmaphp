@@ -24,6 +24,7 @@ final class ClassEntity
         $this->namespace = $namespace;
         $this->name = $name;
         $this->dependencies = new ClassEntityList();
+        $this->namespace->addSubClass($this);
     }
 
     public function getNamespace(): NamespaceEntity
@@ -47,11 +48,10 @@ final class ClassEntity
         return $this->dependencies;
     }
 
-    public function withDependency(self $dependency): self
+    public function addDependency(self $dependency): self
     {
-        $result = clone $this;
-        $result->dependencies = $this->dependencies->add($dependency);
+        $this->dependencies = $this->dependencies->add($dependency);
 
-        return $result;
+        return $this;
     }
 }

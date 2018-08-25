@@ -3,9 +3,6 @@
 namespace Test\Unit\Entity;
 
 use Lencse\ClassMap\Entity\ClassEntity;
-use Lencse\ClassMap\Entity\NamespaceEntity;
-use Lencse\ClassMap\Entity\PackageEntity;
-use PHPUnit\Framework\TestCase;
 
 class ClassEntityTest extends ClassEntityTestBase
 {
@@ -14,6 +11,12 @@ class ClassEntityTest extends ClassEntityTestBase
         $class = new ClassEntity($this->namespaces[0], $this->classNames[0]);
         $this->assertEquals($this->namespaces[0], $class->getNamespace());
         $this->assertEquals($this->classNames[0], $class->getName());
+    }
+
+    public function testRelationship()
+    {
+        $class = new ClassEntity($this->namespaces[0], $this->classNames[0]);
+        $this->assertArraySubset([$class], iterator_to_array($class->getNamespace()->getSubClasses()));
     }
 
     public function testSameClass()
