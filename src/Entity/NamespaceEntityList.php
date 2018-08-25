@@ -2,7 +2,6 @@
 
 namespace Lencse\ClassMap\Entity;
 
-use Countable;
 use Iterator;
 
 final class NamespaceEntityList implements Iterator
