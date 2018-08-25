@@ -45,4 +45,5 @@
             <property name="maximum" value="35" />
         </properties>
     </rule>
+    <exclude-pattern>test/fixtures/**</exclude-pattern>
 </ruleset>

@@ -40,7 +40,7 @@ after_script:
                 -Dsonar.sources=src \
                 -Dsonar.host.url=$SONAR_URL \
                 -Dsonar.login=$SONAR_TOKEN \
-                -Dsonar.exclusions=logs/**,vendor/**,test-fixtures/ \
+                -Dsonar.exclusions=logs/**,vendor/** \
                 -Dsonar.php.tests.reportPath=logs/phpunit/test-report.xml \
                 -Dsonar.php.coverage.reportPaths=logs/phpunit/clover.xml \
         ; fi

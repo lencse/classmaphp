@@ -2,9 +2,9 @@
 
 namespace Lencse\ClassMap\Parsing;
 
-use Lencse\ClassMap\Entity\PHPClass;
+use Lencse\ClassMap\Value\PHPClassList;
 
 interface Parser
 {
-    public function parse(string $content): PHPClass;
+    public function parseAndExtendClassList(string $content, PHPClassList $classes): PHPClassList;
 }

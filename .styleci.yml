@@ -3,7 +3,7 @@ risky: true
 finder:
     exclude:
         - vendor
-        - test-fixtures
+        - test/fixtures
     name: "*.php"
 
 disabled:
