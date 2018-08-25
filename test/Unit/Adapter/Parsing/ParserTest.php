@@ -5,7 +5,6 @@ namespace Test\Unit\Adapter\Parsing;
 use League\Flysystem\Adapter\Local;
 use League\Flysystem\Filesystem;
 use Lencse\ClassMap\Adapter\Parsing\Parser;
-use Lencse\ClassMap\Value\NamespaceId;
 use Lencse\ClassMap\Value\PHPClass;
 use Lencse\ClassMap\Value\PHPClassList;
 use Lencse\ClassMap\Value\StringList;
@@ -47,6 +46,7 @@ class ParserTest extends TestCase
 
     /**
      * @param string $path
+     *
      * @return PHPClass[]
      */
     private function generateClassArrayFromFile(string $path): array

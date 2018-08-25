@@ -2,8 +2,6 @@
 
 namespace Lencse\ClassMap\Adapter\Parsing\Visitor;
 
-use Lencse\ClassMap\Value\NamespaceId;
-use Lencse\ClassMap\Value\NamespaceIdList;
 use PhpParser\Node;
 use PhpParser\Node\Stmt\Namespace_;
 use PhpParser\NodeVisitorAbstract;
