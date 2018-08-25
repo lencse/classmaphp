@@ -6,7 +6,7 @@ use Lencse\ClassMap\Value\NamespaceId;
 use Lencse\ClassMap\Value\NamespaceIdList;
 use Lencse\ClassMap\Value\StringList;
 use PhpParser\Node;
-use PhpParser\Node\Stmt\Class_;
+use PhpParser\Node\Stmt\Use_;
 use PhpParser\NodeVisitorAbstract;
 
 final class DependencyVisitor extends NodeVisitorAbstract
@@ -23,7 +23,7 @@ final class DependencyVisitor extends NodeVisitorAbstract
 
     public function enterNode(Node $node)
     {
-        if ($node instanceof Node\Stmt\Use_) {
+        if ($node instanceof Use_) {
             $this->dependencies = $this->dependencies->add(implode('\\', $node->uses[0]->name->parts));
         }
     }

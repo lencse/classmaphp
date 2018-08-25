@@ -5,7 +5,7 @@ namespace Lencse\ClassMap\Adapter\Parsing\Visitor;
 use Lencse\ClassMap\Value\NamespaceId;
 use Lencse\ClassMap\Value\NamespaceIdList;
 use PhpParser\Node;
-use PhpParser\Node\Stmt\Class_;
+use PhpParser\Node\Stmt\Namespace_;
 use PhpParser\NodeVisitorAbstract;
 
 final class NamespaceVisitor extends NodeVisitorAbstract
@@ -17,7 +17,7 @@ final class NamespaceVisitor extends NodeVisitorAbstract
 
     public function enterNode(Node $node)
     {
-        if ($node instanceof Node\Stmt\Namespace_) {
+        if ($node instanceof Namespace_) {
             $this->namespace = (string) $node->name;
         }
     }
