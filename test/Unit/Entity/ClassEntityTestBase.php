@@ -2,6 +2,7 @@
 
 namespace Test\Unit\Entity;
 
+use Lencse\ClassMap\Entity\ClassEntity;
 use Lencse\ClassMap\Entity\NamespaceEntity;
 use Lencse\ClassMap\Entity\PackageEntity;
 use PHPUnit\Framework\TestCase;
@@ -18,6 +19,11 @@ abstract class ClassEntityTestBase extends TestCase
      */
     protected $namespaces = [];
 
+    /**
+     * @var ClassEntity[]
+     */
+    protected $classes = [];
+
     public function setUp()
     {
         $this->classNames = [
@@ -28,6 +34,14 @@ abstract class ClassEntityTestBase extends TestCase
         $this->namespaces = [
             new NamespaceEntity(new PackageEntity('lencse/classmaphp'), 'Test\\Entity'),
             new NamespaceEntity(new PackageEntity('lencse/classmaphp'), 'Test\\OtherNamespace'),
+        ];
+        $this->classes = [
+            new ClassEntity($this->namespaces[0], $this->classNames[0]),
+            new ClassEntity($this->namespaces[0], $this->classNames[1]),
+            new ClassEntity($this->namespaces[0], $this->classNames[2]),
+            new ClassEntity($this->namespaces[1], $this->classNames[0]),
+            new ClassEntity($this->namespaces[1], $this->classNames[1]),
+            new ClassEntity($this->namespaces[1], $this->classNames[2]),
         ];
     }
 }
