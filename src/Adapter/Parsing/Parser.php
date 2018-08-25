@@ -3,8 +3,8 @@
 namespace Lencse\ClassMap\Adapter\Parsing;
 
 use Lencse\ClassMap\Adapter\Parsing\Visitor\ClassNameVisitor;
-use Lencse\ClassMap\Value\PHPClass;
 use Lencse\ClassMap\Parsing\Parser as ParserInterface;
+use Lencse\ClassMap\Value\PHPClass;
 use Lencse\ClassMap\Value\PHPClassList;
 use PhpParser\NodeTraverser;
 use PhpParser\ParserFactory;

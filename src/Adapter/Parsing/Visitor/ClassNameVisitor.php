@@ -2,10 +2,9 @@
 
 namespace Lencse\ClassMap\Adapter\Parsing\Visitor;
 
-use Lencse\ClassMap\Parsing\Exception\ClassNameNotParsedException;
 use PhpParser\Node;
-use PhpParser\NodeVisitorAbstract;
 use PhpParser\Node\Stmt\Class_;
+use PhpParser\NodeVisitorAbstract;
 
 final class ClassNameVisitor extends NodeVisitorAbstract
 {
