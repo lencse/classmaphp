@@ -27,15 +27,17 @@ final class Parser implements ParserInterface
     public function parseAndExtendClassList(string $content, ClassDataList $classes): ClassDataList
     {
         $statements = $this->parser->parse($content);
-        $traverser = new NodeTraverser();
-        $classNameVisitor = new ClassNameVisitor();
-        $traverser->addVisitor($classNameVisitor);
-        $namespaceVisitor = new NamespaceVisitor();
-        $traverser->addVisitor($namespaceVisitor);
-        $dependencyVisitor = new DependencyVisitor();
-        $traverser->addVisitor($dependencyVisitor);
         if (empty($statements)) {
             return $classes;
+        }
+
+        $classNameVisitor = new ClassNameVisitor();
+        $namespaceVisitor = new NamespaceVisitor();
+        $dependencyVisitor = new DependencyVisitor();
+
+        $traverser = new NodeTraverser();
+        foreach ([$classNameVisitor, $namespaceVisitor, $dependencyVisitor] as $visitor) {
+            $traverser->addVisitor($visitor);
         }
 
         $traverser->traverse($statements);
