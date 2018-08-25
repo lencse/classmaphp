@@ -5,8 +5,8 @@ namespace Test\Unit\Adapter\Parsing;
 use League\Flysystem\Adapter\Local;
 use League\Flysystem\Filesystem;
 use Lencse\ClassMap\Adapter\Parsing\Parser;
-use Lencse\ClassMap\Value\PHPClass;
-use Lencse\ClassMap\Value\PHPClassList;
+use Lencse\ClassMap\Value\ClassData;
+use Lencse\ClassMap\Value\ClassDataList;
 use Lencse\ClassMap\Value\StringList;
 use PHPUnit\Framework\TestCase;
 
@@ -47,14 +47,14 @@ class ParserTest extends TestCase
     /**
      * @param string $path
      *
-     * @return PHPClass[]
+     * @return ClassData[]
      */
     private function generateClassArrayFromFile(string $path): array
     {
         $files = new Filesystem(new Local(__DIR__ . '/../../../fixtures'));
         $parser = new Parser();
         $content = $files->read($path);
-        $classes = $parser->parseAndExtendClassList($content, new PHPClassList());
+        $classes = $parser->parseAndExtendClassList($content, new ClassDataList());
 
         return iterator_to_array($classes);
     }

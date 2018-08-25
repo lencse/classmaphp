@@ -4,14 +4,14 @@ namespace Lencse\ClassMap\Value;
 
 use Iterator;
 
-final class PHPClassList implements Iterator
+final class ClassDataList implements Iterator
 {
     /**
-     * @var PHPClass[]
+     * @var ClassData[]
      */
     private $classes = [];
 
-    public function add(PHPClass $class): self
+    public function add(ClassData $class): self
     {
         $result = clone $this;
         $result->classes[] = $class;
@@ -19,13 +19,13 @@ final class PHPClassList implements Iterator
         return $result;
     }
 
-    public function current(): PHPClass
+    public function current(): ClassData
     {
         return current($this->classes);
     }
 
     /**
-     * @return false|PHPClass
+     * @return false|ClassData
      */
     public function next()
     {

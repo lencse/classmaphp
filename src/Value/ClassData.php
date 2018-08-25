@@ -2,7 +2,7 @@
 
 namespace Lencse\ClassMap\Value;
 
-final class PHPClass
+final class ClassData
 {
     /**
      * @var string
