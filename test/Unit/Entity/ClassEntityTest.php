@@ -7,55 +7,33 @@ use Lencse\ClassMap\Entity\NamespaceEntity;
 use Lencse\ClassMap\Entity\PackageEntity;
 use PHPUnit\Framework\TestCase;
 
-class ClassEntityTest extends TestCase
+class ClassEntityTest extends ClassEntityTestBase
 {
     public function testClassAttributes()
     {
-        $class = new ClassEntity(
-            new NamespaceEntity(new PackageEntity('lencse/classmaphp'), 'Test\\Entity'),
-            'ClassName'
-        );
-        $this->assertEquals('lencse/classmaphp', $class->getNamespace()->getPackage()->getId());
-        $this->assertEquals('Test\\Entity', $class->getNamespace()->getId());
-        $this->assertEquals('ClassName', $class->getName());
+        $class = new ClassEntity($this->namespaces[0], $this->classNames[0]);
+        $this->assertEquals($this->namespaces[0], $class->getNamespace());
+        $this->assertEquals($this->classNames[0], $class->getName());
     }
 
     public function testSameClass()
     {
-        $class1 = new ClassEntity(
-            new NamespaceEntity(new PackageEntity('lencse/classmaphp'), 'Test\\Entity'),
-            'ClassName'
-        );
-        $class2 = new ClassEntity(
-            new NamespaceEntity(new PackageEntity('lencse/classmaphp'), 'Test\\Entity'),
-            'ClassName'
-        );
+        $class1 = new ClassEntity($this->namespaces[0], $this->classNames[0]);
+        $class2 = new ClassEntity($this->namespaces[0], $this->classNames[0]);
         $this->assertTrue($class1->same($class2));
     }
 
-    public function testNotSameWhenIdIsDifferent()
+    public function testNotSameWhenNameIsDifferent()
     {
-        $class1 = new ClassEntity(
-            new NamespaceEntity(new PackageEntity('lencse/classmaphp'), 'Test\\Entity'),
-            'ClassName1'
-        );
-        $class2 = new ClassEntity(
-            new NamespaceEntity(new PackageEntity('lencse/classmaphp'), 'Test\\Entity'),
-            'ClassName2'
-        );
+        $class1 = new ClassEntity($this->namespaces[0], $this->classNames[1]);
+        $class2 = new ClassEntity($this->namespaces[0], $this->classNames[2]);
         $this->assertFalse($class1->same($class2));
     }
 
     public function testNotSameWhenPackageIsDifferent()
     {
-        $class1 = new ClassEntity(
-            new NamespaceEntity(new PackageEntity('lencse/classmaphp'), 'Test\\Entity'),
-            'ClassName'
-        );
-        $class2 = new ClassEntity(
-            new NamespaceEntity(new PackageEntity('lencse/other'), 'Test\\Entity'),
-            'ClassName'
-        );
+        $class1 = new ClassEntity($this->namespaces[0], $this->classNames[0]);
+        $class2 = new ClassEntity($this->namespaces[1], $this->classNames[0]);
         $this->assertFalse($class1->same($class2));
     }
 }
