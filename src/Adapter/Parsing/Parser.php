@@ -8,10 +8,9 @@ use Lencse\ClassMap\Adapter\Parsing\Visitor\NamespaceVisitor;
 use Lencse\ClassMap\Parsing\Parser as ParserInterface;
 use Lencse\ClassMap\Value\PHPClass;
 use Lencse\ClassMap\Value\PHPClassList;
-use Lencse\ClassMap\Value\StringList;
 use PhpParser\NodeTraverser;
-use PhpParser\ParserFactory;
 use PhpParser\Parser as PHPParser;
+use PhpParser\ParserFactory;
 
 final class Parser implements ParserInterface
 {
