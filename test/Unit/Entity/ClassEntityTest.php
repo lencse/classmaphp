@@ -16,7 +16,7 @@ class ClassEntityTest extends ClassEntityTestBase
     public function testRelationship()
     {
         $class = new ClassEntity($this->namespaces[0], $this->classNames[0]);
-        $this->assertArraySubset([$class], iterator_to_array($class->getNamespace()->getSubClasses()));
+        $this->assertEquals([$class], iterator_to_array($class->getNamespace()->getSubClasses()));
     }
 
     public function testSameClass()

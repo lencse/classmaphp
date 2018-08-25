@@ -53,4 +53,16 @@ final class NamespaceEntity
     {
         return $this->subClasses;
     }
+
+    public function getNamespaceDependencies(): NamespaceEntityList
+    {
+        $result = new NamespaceEntityList();
+        foreach ($this->getSubClasses() as $subClass) {
+            foreach ($subClass->getDependencies() as $dependency) {
+                $result = $result->add($dependency->getNamespace());
+            }
+        }
+
+        return $result;
+    }
 }
