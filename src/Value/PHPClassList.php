@@ -4,7 +4,7 @@ namespace Lencse\ClassMap\Value;
 
 use Iterator;
 
-class PHPClassList implements Iterator
+final class PHPClassList implements Iterator
 {
     /**
      * @var PHPClass[]

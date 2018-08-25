@@ -14,15 +14,15 @@ final class Parser implements ParserInterface
     public function parseAndExtendClassList(string $content, PHPClassList $classes): PHPClassList
     {
         $parser = (new ParserFactory())->create(ParserFactory::PREFER_PHP7);
-        $ast = $parser->parse($content);
+        $statements = $parser->parse($content);
         $visitor = new ClassNameVisitor();
         $traverser = new NodeTraverser();
         $traverser->addVisitor($visitor);
-        if (empty($ast)) {
+        if (empty($statements)) {
             return $classes;
         }
 
-        $traverser->traverse($ast);
+        $traverser->traverse($statements);
         if (!$visitor->isClassDefinition()) {
             return $classes;
         }
