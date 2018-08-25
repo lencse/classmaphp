@@ -5,7 +5,6 @@ namespace Test\Unit\Adapter\Parsing;
 use League\Flysystem\Adapter\Local;
 use League\Flysystem\Filesystem;
 use Lencse\ClassMap\Adapter\Parsing\Parser;
-use Lencse\ClassMap\Parsing\Exception\ClassNameNotParsedException;
 use Lencse\ClassMap\Value\PHPClassList;
 use PHPUnit\Framework\TestCase;
 
@@ -41,6 +40,7 @@ class ParserTest extends TestCase
     private function getFileContent(string $path): string
     {
         $files = new Filesystem(new Local(__DIR__ . '/../../../fixtures'));
+
         return $files->read($path);
     }
 }
