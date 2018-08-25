@@ -1,6 +1,6 @@
 <?php
 
-namespace Lencse\ClassMap\Value;
+namespace Lencse\ClassMap\Data;
 
 final class ClassData
 {

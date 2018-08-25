@@ -5,9 +5,9 @@ namespace Test\Unit\Adapter\Parsing;
 use League\Flysystem\Adapter\Local;
 use League\Flysystem\Filesystem;
 use Lencse\ClassMap\Adapter\Parsing\Parser;
-use Lencse\ClassMap\Value\ClassData;
-use Lencse\ClassMap\Value\ClassDataList;
-use Lencse\ClassMap\Value\StringList;
+use Lencse\ClassMap\Data\ClassData;
+use Lencse\ClassMap\Data\ClassDataList;
+use Lencse\ClassMap\Data\StringList;
 use PHPUnit\Framework\TestCase;
 
 class ParserTest extends TestCase
