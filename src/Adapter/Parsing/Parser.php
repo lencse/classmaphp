@@ -45,12 +45,10 @@ final class Parser implements ParserInterface
             return $classes;
         }
 
-        $class = new ClassData(
+        return $classes->add(new ClassData(
             $classNameVisitor->getClassName(),
             $namespaceVisitor->getNamespace(),
             $dependencyVisitor->getDependencies()
-        );
-
-        return $classes->add($class);
+        ));
     }
 }

@@ -38,6 +38,12 @@ class ParserTest extends TestCase
         $this->assertEmpty($classes);
     }
 
+    public function testParsingClassesWithoutNamespace()
+    {
+        $classes = $this->generateClassArrayFromFile('SymfonyRequirements.php');
+        $this->assertEmpty($classes);
+    }
+
     public function testParsingEmptyFiles()
     {
         $classes = $this->generateClassArrayFromFile('empty.php');
