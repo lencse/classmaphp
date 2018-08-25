@@ -9,13 +9,24 @@ final class PHPClass
      */
     private $name;
 
-    public function __construct(string $name)
+    /**
+     * @var string
+     */
+    private $namespace;
+
+    public function __construct(string $name, string $namespace)
     {
         $this->name = $name;
+        $this->namespace = $namespace;
     }
 
     public function getName(): string
     {
         return $this->name;
+    }
+
+    public function getNamespace(): string
+    {
+        return $this->namespace;
     }
 }
