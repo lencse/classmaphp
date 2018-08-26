@@ -2,7 +2,7 @@
 
 namespace Lencse\ClassMap\Entity;
 
-final class PackageEntity
+final class PackageEntity implements HasKey
 {
     /**
      * @var string
@@ -22,5 +22,10 @@ final class PackageEntity
     public function same(self $other): bool
     {
         return $other->getId() === $this->getId();
+    }
+
+    public function getKey(): string
+    {
+        return $this->getId();
     }
 }

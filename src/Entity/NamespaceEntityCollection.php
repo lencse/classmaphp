@@ -4,16 +4,20 @@ namespace Lencse\ClassMap\Entity;
 
 use Iterator;
 
-final class NamespaceEntityList implements Iterator
+final class NamespaceEntityCollection implements Iterator
 {
     /**
      * @var NamespaceEntity[]
      */
     private $classes = [];
 
-    public function add(NamespaceEntity $class): void
+    public function add(NamespaceEntity $namespace): void
     {
-        $this->classes[] = $class;
+        if (isset($this->classes[$namespace->getKey()])) {
+            return;
+        }
+
+        $this->classes[$namespace->getKey()] = $namespace;
     }
 
     public function current(): NamespaceEntity

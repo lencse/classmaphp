@@ -2,7 +2,7 @@
 
 namespace Lencse\ClassMap\Entity;
 
-final class NamespaceEntity
+final class NamespaceEntity implements HasKey
 {
     /**
      * @var PackageEntity
@@ -42,6 +42,11 @@ final class NamespaceEntity
             && $other->getPackage()->same($this->getPackage());
     }
 
+    public function getKey(): string
+    {
+        return "{$this->getPackage()->getKey()}>{$this->getId()}";
+    }
+
     public function addSubClass(ClassEntity $class): void
     {
         $this->subClasses->add($class);
@@ -52,9 +57,9 @@ final class NamespaceEntity
         return $this->subClasses;
     }
 
-    public function getNamespaceDependencies(): NamespaceEntityList
+    public function getNamespaceDependencies(): NamespaceEntityCollection
     {
-        $result = new NamespaceEntityList();
+        $result = new NamespaceEntityCollection();
         foreach ($this->getSubClasses() as $subClass) {
             foreach ($subClass->getDependencies() as $dependency) {
                 $result->add($dependency->getNamespace());
