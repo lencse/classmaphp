@@ -3,7 +3,6 @@
 namespace Test\Unit\Entity;
 
 use Lencse\ClassMap\Entity\ClassEntity;
-use Lencse\ClassMap\Entity\NamespaceEntity;
 
 class ClassEntityDependenciesTest extends ClassEntityTestBase
 {
