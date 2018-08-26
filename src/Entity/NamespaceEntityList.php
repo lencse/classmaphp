@@ -11,12 +11,9 @@ final class NamespaceEntityList implements Iterator
      */
     private $classes = [];
 
-    public function add(NamespaceEntity $class): self
+    public function add(NamespaceEntity $class): void
     {
-        $result = clone $this;
-        $result->classes[] = $class;
-
-        return $result;
+        $this->classes[] = $class;
     }
 
     public function current(): NamespaceEntity

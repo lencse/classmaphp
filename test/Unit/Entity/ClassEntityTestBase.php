@@ -27,13 +27,18 @@ abstract class ClassEntityTestBase extends TestCase
     public function setUp()
     {
         $this->classNames = [
-            'ClassName',
             'ClassName1',
             'ClassName2',
+            'ClassName3',
+            'ClassName4',
+            'ClassName5',
         ];
         $this->namespaces = [
-            new NamespaceEntity(new PackageEntity('lencse/classmaphp'), 'Test\\Entity'),
-            new NamespaceEntity(new PackageEntity('lencse/classmaphp'), 'Test\\OtherNamespace'),
+            new NamespaceEntity(new PackageEntity('lencse/classmaphp'), 'Test\\Namespace1'),
+            new NamespaceEntity(new PackageEntity('lencse/classmaphp'), 'Test\\Namespace2'),
+            new NamespaceEntity(new PackageEntity('lencse/classmaphp'), 'Test\\Namespace3'),
+            new NamespaceEntity(new PackageEntity('lencse/classmaphp'), 'Test\\Namespace4'),
+            new NamespaceEntity(new PackageEntity('lencse/classmaphp'), 'Test\\Namespace5'),
         ];
     }
 

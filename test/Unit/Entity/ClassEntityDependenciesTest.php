@@ -12,7 +12,8 @@ class ClassEntityDependenciesTest extends ClassEntityTestBase
 
     public function testDependency()
     {
-        $class = $this->createClass(0, 0)->addDependency($this->createClass(0, 1));
+        $class = $this->createClass(0, 0);
+        $class->addDependency($this->createClass(0, 1));
         $this->assertEquals([$this->createClass(0, 1)], iterator_to_array($class->getDependencies()));
     }
 

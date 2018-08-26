@@ -48,10 +48,8 @@ final class ClassEntity
         return $this->dependencies;
     }
 
-    public function addDependency(self $dependency): self
+    public function addDependency(self $dependency): void
     {
-        $this->dependencies = $this->dependencies->add($dependency);
-
-        return $this;
+        $this->dependencies->add($dependency);
     }
 }

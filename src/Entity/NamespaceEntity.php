@@ -42,11 +42,9 @@ final class NamespaceEntity
             && $other->getPackage()->same($this->getPackage());
     }
 
-    public function addSubClass(ClassEntity $class): self
+    public function addSubClass(ClassEntity $class): void
     {
-        $this->subClasses = $this->subClasses->add($class);
-
-        return $this;
+        $this->subClasses->add($class);
     }
 
     public function getSubClasses(): ClassEntityList
@@ -59,7 +57,7 @@ final class NamespaceEntity
         $result = new NamespaceEntityList();
         foreach ($this->getSubClasses() as $subClass) {
             foreach ($subClass->getDependencies() as $dependency) {
-                $result = $result->add($dependency->getNamespace());
+                $result->add($dependency->getNamespace());
             }
         }
 

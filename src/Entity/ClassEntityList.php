@@ -12,12 +12,9 @@ final class ClassEntityList implements Iterator, Countable
      */
     private $classes = [];
 
-    public function add(ClassEntity $class): self
+    public function add(ClassEntity $class): void
     {
-        $result = clone $this;
-        $result->classes[] = $class;
-
-        return $result;
+        $this->classes[] = $class;
     }
 
     public function current(): ClassEntity
