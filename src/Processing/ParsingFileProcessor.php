@@ -35,7 +35,6 @@ final class ParsingFileProcessor implements FileProcessor, ClassDataHandler
         $this->classDataList = $this->classDataList->add($classData);
     }
 
-
     public function getClassDataList(): ClassDataList
     {
         return $this->classDataList;

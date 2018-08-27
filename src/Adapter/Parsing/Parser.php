@@ -6,7 +6,6 @@ use Lencse\ClassMap\Adapter\Parsing\Visitor\ClassNameVisitor;
 use Lencse\ClassMap\Adapter\Parsing\Visitor\DependencyVisitor;
 use Lencse\ClassMap\Adapter\Parsing\Visitor\NamespaceVisitor;
 use Lencse\ClassMap\ClassData\ClassData;
-use Lencse\ClassMap\ClassData\ClassDataList;
 use Lencse\ClassMap\Parsing\ClassDataHandler;
 use Lencse\ClassMap\Parsing\Parser as ParserInterface;
 use PhpParser\NodeTraverser;

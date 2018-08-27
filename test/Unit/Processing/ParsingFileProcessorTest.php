@@ -3,7 +3,6 @@
 namespace Test\Unit\Processing;
 
 use Lencse\ClassMap\ClassData\ClassData;
-use Lencse\ClassMap\ClassData\ClassDataList;
 use Lencse\ClassMap\ClassData\StringList;
 use Lencse\ClassMap\Parsing\ClassDataHandler;
 use Lencse\ClassMap\Parsing\Parser;
