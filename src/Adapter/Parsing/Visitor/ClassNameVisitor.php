@@ -4,6 +4,7 @@ namespace Lencse\ClassMap\Adapter\Parsing\Visitor;
 
 use PhpParser\Node;
 use PhpParser\Node\Stmt\Class_;
+use PhpParser\NodeTraverser;
 use PhpParser\NodeVisitorAbstract;
 
 final class ClassNameVisitor extends NodeVisitorAbstract
@@ -23,6 +24,7 @@ final class ClassNameVisitor extends NodeVisitorAbstract
         if ($node instanceof Class_) {
             $this->classDefinition = true;
             $this->className = (string) $node->name;
+            return NodeTraverser::STOP_TRAVERSAL;
         }
     }
 

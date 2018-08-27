@@ -5,7 +5,7 @@ namespace Lencse\ClassMap\Entity;
 use Countable;
 use Iterator;
 
-final class ClassEntityList implements Iterator, Countable
+final class ClassEntityCollection implements Iterator, Countable
 {
     /**
      * @var ClassEntity[]
@@ -14,7 +14,11 @@ final class ClassEntityList implements Iterator, Countable
 
     public function add(ClassEntity $class): void
     {
-        $this->classes[] = $class;
+        if (isset($this->classes[$class->getKey()])) {
+            return;
+        }
+
+        $this->classes[$class->getKey()] = $class;
     }
 
     public function current(): ClassEntity

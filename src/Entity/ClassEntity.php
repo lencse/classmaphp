@@ -2,7 +2,7 @@
 
 namespace Lencse\ClassMap\Entity;
 
-final class ClassEntity
+final class ClassEntity implements HasKey
 {
     /**
      * @var NamespaceEntity
@@ -15,7 +15,7 @@ final class ClassEntity
     private $name;
 
     /**
-     * @var ClassEntityList
+     * @var ClassEntityCollection
      */
     private $dependencies;
 
@@ -23,7 +23,7 @@ final class ClassEntity
     {
         $this->namespace = $namespace;
         $this->name = $name;
-        $this->dependencies = new ClassEntityList();
+        $this->dependencies = new ClassEntityCollection();
         $this->namespace->addSubClass($this);
     }
 
@@ -43,7 +43,12 @@ final class ClassEntity
             && $other->getNamespace()->same($this->getNamespace());
     }
 
-    public function getDependencies(): ClassEntityList
+    public function getKey(): string
+    {
+        return "{$this->getNamespace()->getKey()}>{$this->getName()}";
+    }
+
+    public function getDependencies(): ClassEntityCollection
     {
         return $this->dependencies;
     }

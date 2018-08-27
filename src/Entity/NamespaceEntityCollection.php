@@ -9,20 +9,20 @@ final class NamespaceEntityCollection implements Iterator
     /**
      * @var NamespaceEntity[]
      */
-    private $classes = [];
+    private $namespaces = [];
 
     public function add(NamespaceEntity $namespace): void
     {
-        if (isset($this->classes[$namespace->getKey()])) {
+        if (isset($this->namespaces[$namespace->getKey()])) {
             return;
         }
 
-        $this->classes[$namespace->getKey()] = $namespace;
+        $this->namespaces[$namespace->getKey()] = $namespace;
     }
 
     public function current(): NamespaceEntity
     {
-        return current($this->classes);
+        return current($this->namespaces);
     }
 
     /**
@@ -30,21 +30,21 @@ final class NamespaceEntityCollection implements Iterator
      */
     public function next()
     {
-        return next($this->classes);
+        return next($this->namespaces);
     }
 
     public function key()
     {
-        return key($this->classes);
+        return key($this->namespaces);
     }
 
     public function valid(): bool
     {
-        return null !== key($this->classes) && false !== key($this->classes);
+        return null !== key($this->namespaces) && false !== key($this->namespaces);
     }
 
     public function rewind(): void
     {
-        reset($this->classes);
+        reset($this->namespaces);
     }
 }

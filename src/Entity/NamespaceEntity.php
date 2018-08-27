@@ -15,7 +15,7 @@ final class NamespaceEntity implements HasKey
     private $id;
 
     /**
-     * @var ClassEntityList
+     * @var ClassEntityCollection
      */
     private $subClasses;
 
@@ -23,7 +23,7 @@ final class NamespaceEntity implements HasKey
     {
         $this->package = $package;
         $this->id = $id;
-        $this->subClasses = new ClassEntityList();
+        $this->subClasses = new ClassEntityCollection();
     }
 
     public function getPackage(): PackageEntity
@@ -52,7 +52,7 @@ final class NamespaceEntity implements HasKey
         $this->subClasses->add($class);
     }
 
-    public function getSubClasses(): ClassEntityList
+    public function getSubClasses(): ClassEntityCollection
     {
         return $this->subClasses;
     }
