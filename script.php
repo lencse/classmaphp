@@ -19,8 +19,6 @@ $files = new Filesystem(new Local(__DIR__ /*. '/symfony'*/));
 
 $composer = json_decode($files->read('composer.json'), true);
 
-$package = new PackageEntity($composer['name']);
-
 $dirs = $composer['autoload']['psr-4'];
 
 $parser = new Parser();
@@ -41,7 +39,7 @@ $namespaces = [];
 $classes = [];
 
 foreach ($classDataList as $classData) {
-    $namespace = new NamespaceEntity($package, $classData->getNamespace());
+    $namespace = new NamespaceEntity($classData->getNamespace());
     if (!isset($namespaces[$namespace->getKey()])) {
         $namespaces[$namespace->getKey()] = $namespace;
     }
@@ -50,7 +48,7 @@ foreach ($classDataList as $classData) {
         $explode = explode('\\', $dependency);
         $ns = implode('\\', array_slice($explode, 0, count($explode) - 1));
         $cl = array_pop($explode);
-        $dpn = new NamespaceEntity($package, $ns);
+        $dpn = new NamespaceEntity($ns);
         if (!isset($namespaces[$dpn->getKey()])) {
             $namespaces[$dpn->getKey()] = $dpn;
         }

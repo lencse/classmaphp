@@ -5,11 +5,6 @@ namespace Lencse\ClassMap\Entity;
 final class NamespaceEntity implements HasKey
 {
     /**
-     * @var PackageEntity
-     */
-    private $package;
-
-    /**
      * @var string
      */
     private $id;
@@ -19,16 +14,10 @@ final class NamespaceEntity implements HasKey
      */
     private $subClasses;
 
-    public function __construct(PackageEntity $package, string $id)
+    public function __construct(string $id)
     {
-        $this->package = $package;
         $this->id = $id;
         $this->subClasses = new ClassEntityCollection();
-    }
-
-    public function getPackage(): PackageEntity
-    {
-        return $this->package;
     }
 
     public function getId(): string
@@ -38,13 +27,12 @@ final class NamespaceEntity implements HasKey
 
     public function same(self $other): bool
     {
-        return $other->getId() === $this->getId()
-            && $other->getPackage()->same($this->getPackage());
+        return $other->getId() === $this->getId();
     }
 
     public function getKey(): string
     {
-        return "{$this->getPackage()->getKey()}>{$this->getId()}";
+        return $this->getId();
     }
 
     public function addSubClass(ClassEntity $class): void

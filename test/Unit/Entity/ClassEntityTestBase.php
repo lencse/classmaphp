@@ -34,11 +34,11 @@ abstract class ClassEntityTestBase extends TestCase
             'ClassName5',
         ];
         $this->namespaces = [
-            new NamespaceEntity(new PackageEntity('lencse/classmaphp'), 'Test\\Namespace1'),
-            new NamespaceEntity(new PackageEntity('lencse/classmaphp'), 'Test\\Namespace2'),
-            new NamespaceEntity(new PackageEntity('lencse/classmaphp'), 'Test\\Namespace3'),
-            new NamespaceEntity(new PackageEntity('lencse/classmaphp'), 'Test\\Namespace4'),
-            new NamespaceEntity(new PackageEntity('lencse/classmaphp'), 'Test\\Namespace5'),
+            new NamespaceEntity('Test\\Namespace1'),
+            new NamespaceEntity('Test\\Namespace2'),
+            new NamespaceEntity('Test\\Namespace3'),
+            new NamespaceEntity('Test\\Namespace4'),
+            new NamespaceEntity('Test\\Namespace5'),
         ];
     }
 
