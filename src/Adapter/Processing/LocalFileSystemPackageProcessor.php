@@ -29,10 +29,11 @@ final class LocalFileSystemPackageProcessor implements PackageProcessor
         foreach ($composerData['autoload']['psr-4'] as $dir) {
             /** @var string[][] $fileIterator */
             $fileIterator = $this->files->listContents($dir, true);
-            foreach ($fileIterator as $item) {
-                /** @var string[] $fileData */
-                $fileData = $item;
-                if ('file' === $fileData['type'] && isset($fileData['extension']) && 'php' === $fileData['extension']) {
+            foreach ($fileIterator as $fileData) {
+                if ('file' === $fileData['type']
+                    && isset($fileData['extension'])
+                    && 'php' === $fileData['extension']
+                ) {
                     $fileProcessor->process((string) $this->files->read($fileData['path']));
                 }
             }
