@@ -2,10 +2,6 @@
 
 namespace Lencse\ClassMap\Classes;
 
-use Lencse\ClassMap\Classes\ClassEntityCollection;
-use Lencse\ClassMap\Classes\Entity;
-use Lencse\ClassMap\Classes\NamespaceEntity;
-
 final class ClassEntity implements Entity
 {
     /**

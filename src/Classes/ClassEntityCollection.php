@@ -4,7 +4,6 @@ namespace Lencse\ClassMap\Classes;
 
 use Countable;
 use Iterator;
-use Lencse\ClassMap\Classes\ClassEntity;
 
 final class ClassEntityCollection implements Iterator, Countable
 {
