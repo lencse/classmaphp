@@ -3,9 +3,7 @@
 namespace Lencse\ClassMap\Processing;
 
 use Lencse\ClassMap\ClassData\ClassData;
-use Lencse\ClassMap\ClassData\ClassDataList;
 use Lencse\ClassMap\Classes\ClassRepository;
-use Lencse\ClassMap\Classes\NamespaceKey;
 use Lencse\ClassMap\Classes\NamespaceRepository;
 use Lencse\ClassMap\Parsing\ClassDataHandler;
 use Lencse\ClassMap\Parsing\Parser;

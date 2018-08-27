@@ -5,9 +5,6 @@ namespace App;
 
 use Lencse\ClassMap\Adapter\Parsing\Parser;
 use Lencse\ClassMap\Adapter\Processing\LocalFileSystemPackageProcessor;
-use Lencse\ClassMap\Classes\ClassRepository;
-use Lencse\ClassMap\Classes\NamespaceKey;
-use Lencse\ClassMap\Classes\NamespaceRepository;
 use Lencse\ClassMap\Processing\ParsingFileProcessor;
 
 require_once __DIR__ . '/vendor/autoload.php';
