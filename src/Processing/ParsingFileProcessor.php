@@ -2,10 +2,12 @@
 
 namespace Lencse\ClassMap\Processing;
 
+use Lencse\ClassMap\ClassData\ClassData;
 use Lencse\ClassMap\ClassData\ClassDataList;
+use Lencse\ClassMap\Parsing\ClassDataHandler;
 use Lencse\ClassMap\Parsing\Parser;
 
-final class ParsingFileProcessor implements FileProcessor
+final class ParsingFileProcessor implements FileProcessor, ClassDataHandler
 {
     /**
      * @var Parser
@@ -25,8 +27,14 @@ final class ParsingFileProcessor implements FileProcessor
 
     public function process(string $content): void
     {
-        $this->classDataList = $this->classDataList->append($this->parser->parse($content));
+        $this->parser->parse($content, $this);
     }
+
+    public function handle(ClassData $classData): void
+    {
+        $this->classDataList = $this->classDataList->add($classData);
+    }
+
 
     public function getClassDataList(): ClassDataList
     {

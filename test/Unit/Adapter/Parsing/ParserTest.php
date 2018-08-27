@@ -7,10 +7,16 @@ use League\Flysystem\Filesystem;
 use Lencse\ClassMap\Adapter\Parsing\Parser;
 use Lencse\ClassMap\ClassData\ClassData;
 use Lencse\ClassMap\ClassData\StringList;
+use Lencse\ClassMap\Parsing\ClassDataHandler;
 use PHPUnit\Framework\TestCase;
 
-class ParserTest extends TestCase
+class ParserTest extends TestCase implements ClassDataHandler
 {
+    /**
+     * @var ClassData[]
+     */
+    private $classes = [];
+
     public function testParsingClassWithoutDependencies()
     {
         $classes = $this->generateClassArrayFromFile('EventDispatcher.php');
@@ -49,6 +55,11 @@ class ParserTest extends TestCase
         $this->assertEmpty($classes);
     }
 
+    public function handle(ClassData $classData): void
+    {
+        $this->classes[] = $classData;
+    }
+
     /**
      * @param string $path
      *
@@ -59,8 +70,9 @@ class ParserTest extends TestCase
         $files = new Filesystem(new Local(__DIR__ . '/../../../fixtures/files'));
         $parser = new Parser();
         $content = $files->read($path);
-        $classes = $parser->parse($content);
+        $this->classes = [];
+        $parser->parse($content, $this);
 
-        return iterator_to_array($classes);
+        return $this->classes;
     }
 }

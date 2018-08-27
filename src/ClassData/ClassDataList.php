@@ -19,14 +19,6 @@ final class ClassDataList implements Iterator
         return $result;
     }
 
-    public function append(self $list): self
-    {
-        $result = new self();
-        $result->classes = array_merge($this->classes, $list->classes);
-
-        return $result;
-    }
-
     public function current(): ClassData
     {
         return current($this->classes);

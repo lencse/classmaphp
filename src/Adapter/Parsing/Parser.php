@@ -7,6 +7,7 @@ use Lencse\ClassMap\Adapter\Parsing\Visitor\DependencyVisitor;
 use Lencse\ClassMap\Adapter\Parsing\Visitor\NamespaceVisitor;
 use Lencse\ClassMap\ClassData\ClassData;
 use Lencse\ClassMap\ClassData\ClassDataList;
+use Lencse\ClassMap\Parsing\ClassDataHandler;
 use Lencse\ClassMap\Parsing\Parser as ParserInterface;
 use PhpParser\NodeTraverser;
 use PhpParser\Parser as PHPParser;
@@ -24,11 +25,11 @@ final class Parser implements ParserInterface
         $this->parser = (new ParserFactory())->create(ParserFactory::PREFER_PHP7);
     }
 
-    public function parse(string $content): ClassDataList
+    public function parse(string $content, ClassDataHandler $handler): void
     {
         $statements = $this->parser->parse($content);
         if (empty($statements)) {
-            return new ClassDataList();
+            return;
         }
 
         $classNameVisitor = new ClassNameVisitor();
@@ -42,10 +43,10 @@ final class Parser implements ParserInterface
 
         $traverser->traverse($statements);
         if (!$classNameVisitor->isClassDefinition() || '' === $namespaceVisitor->getNamespace()) {
-            return new ClassDataList();
+            return;
         }
 
-        return (new ClassDataList())->add(new ClassData(
+        $handler->handle(new ClassData(
             $classNameVisitor->getClassName(),
             $namespaceVisitor->getNamespace(),
             $dependencyVisitor->getDependencies()

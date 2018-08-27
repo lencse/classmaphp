@@ -25,10 +25,8 @@ final class LocalFileSystemPackageProcessor implements PackageProcessor
     {
         /** @var string[][][] $composerData */
         $composerData = Json::decode($this->files->read('composer.json'), Json::FORCE_ARRAY);
-        /** @var string[] $composerSettings */
-        $composerSettings = $composerData['autoload']['psr-4'];
 
-        foreach ($composerSettings as $dir) {
+        foreach ($composerData['autoload']['psr-4'] as $dir) {
             /** @var string[][] $fileIterator */
             $fileIterator = $this->files->listContents($dir, true);
             foreach ($fileIterator as $item) {
