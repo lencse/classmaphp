@@ -9,7 +9,6 @@ use Lencse\ClassMap\Adapter\Parsing\Parser;
 use Lencse\ClassMap\Data\ClassDataList;
 use Lencse\ClassMap\Entity\ClassEntity;
 use Lencse\ClassMap\Entity\NamespaceEntity;
-use Lencse\ClassMap\Entity\PackageEntity;
 
 require_once __DIR__ . '/vendor/autoload.php';
 

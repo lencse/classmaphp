@@ -24,6 +24,7 @@ final class ClassNameVisitor extends NodeVisitorAbstract
         if ($node instanceof Class_) {
             $this->classDefinition = true;
             $this->className = (string) $node->name;
+
             return NodeTraverser::STOP_TRAVERSAL;
         }
     }
