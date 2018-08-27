@@ -9,6 +9,7 @@ use Lencse\ClassMap\Adapter\Parsing\Parser;
 use Lencse\ClassMap\Adapter\Processing\LocalFileSystemPackageProcessor;
 use Lencse\ClassMap\Classes\ClassEntity;
 use Lencse\ClassMap\Classes\NamespaceEntity;
+use Lencse\ClassMap\Classes\NamespaceRepository;
 use Lencse\ClassMap\Processing\ParsingFileProcessor;
 
 require_once __DIR__ . '/vendor/autoload.php';
@@ -25,33 +26,25 @@ $processor = new LocalFileSystemPackageProcessor(__DIR__);
 $fileProcessor = new ParsingFileProcessor(new Parser());
 $processor->processPhpFiles($fileProcessor);
 
-/** @var NamespaceEntity[] $namespaces */
-$namespaces = [];
+$namespaces = new NamespaceRepository();
 /** @var ClassEntity $classes */
 $classes = [];
 
 foreach ($fileProcessor->getClassDataList() as $classData) {
-    $namespace = new NamespaceEntity($classData->getNamespace());
-    if (!isset($namespaces[$namespace->getKey()])) {
-        $namespaces[$namespace->getKey()] = $namespace;
-    }
+    $namespace = $namespaces->get($classData->getNamespace());
     $depClasses = [];
     foreach ($classData->getDependencies() as $dependency) {
         $explode = explode('\\', $dependency);
         $ns = implode('\\', array_slice($explode, 0, count($explode) - 1));
         $cl = array_pop($explode);
-        $dpn = new NamespaceEntity($ns);
-        if (!isset($namespaces[$dpn->getKey()])) {
-            $namespaces[$dpn->getKey()] = $dpn;
-        }
-        $depNamespace = $namespaces[$dpn->getKey()];
+        $depNamespace = $namespaces->get($ns);
         $dpc = new ClassEntity($depNamespace, $cl);
         if (!isset($classes[$dpc->getKey()])) {
             $classes[$dpc->getKey()] = $dpc;
         }
         $depClasses[] = $classes[$dpc->getKey()];
     }
-    $cla = new ClassEntity($namespaces[$namespace->getKey()], $classData->getName());
+    $cla = new ClassEntity($namespace, $classData->getName());
     if (!isset($classes[$cla->getKey()])) {
         $classes[$cla->getKey()] = $cla;
     }
@@ -63,7 +56,7 @@ foreach ($fileProcessor->getClassDataList() as $classData) {
 
 //echo 1;
 
-foreach ($namespaces as $namespace) {
+foreach ($namespaces->getNamespaces() as $namespace) {
     echo '\\'. $namespace->getId() . PHP_EOL;
     foreach ($namespace->getNamespaceDependencies() as $dependency) {
         echo '    \\' . $dependency->getId() . PHP_EOL;
