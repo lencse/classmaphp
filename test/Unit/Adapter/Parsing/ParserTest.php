@@ -6,7 +6,6 @@ use League\Flysystem\Adapter\Local;
 use League\Flysystem\Filesystem;
 use Lencse\ClassMap\Adapter\Parsing\Parser;
 use Lencse\ClassMap\ClassData\ClassData;
-use Lencse\ClassMap\ClassData\ClassDataList;
 use Lencse\ClassMap\ClassData\StringList;
 use PHPUnit\Framework\TestCase;
 
