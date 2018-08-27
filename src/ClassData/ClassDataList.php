@@ -1,33 +1,32 @@
 <?php
 
-namespace Lencse\ClassMap\Entity;
+namespace Lencse\ClassMap\ClassData;
 
-use Countable;
 use Iterator;
+use Lencse\ClassMap\ClassData\ClassData;
 
-final class ClassEntityCollection implements Iterator, Countable
+final class ClassDataList implements Iterator
 {
     /**
-     * @var ClassEntity[]
+     * @var ClassData[]
      */
     private $classes = [];
 
-    public function add(ClassEntity $class): void
+    public function add(ClassData $class): self
     {
-        if (isset($this->classes[$class->getKey()])) {
-            return;
-        }
+        $result = clone $this;
+        $result->classes[] = $class;
 
-        $this->classes[$class->getKey()] = $class;
+        return $result;
     }
 
-    public function current(): ClassEntity
+    public function current(): ClassData
     {
         return current($this->classes);
     }
 
     /**
-     * @return false|ClassEntity
+     * @return false|ClassData
      */
     public function next()
     {
@@ -47,10 +46,5 @@ final class ClassEntityCollection implements Iterator, Countable
     public function rewind(): void
     {
         reset($this->classes);
-    }
-
-    public function count(): int
-    {
-        return count($this->classes);
     }
 }

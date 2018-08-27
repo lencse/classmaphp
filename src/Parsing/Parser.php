@@ -2,7 +2,7 @@
 
 namespace Lencse\ClassMap\Parsing;
 
-use Lencse\ClassMap\Data\ClassDataList;
+use Lencse\ClassMap\ClassData\ClassDataList;
 
 interface Parser
 {

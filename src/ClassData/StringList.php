@@ -1,6 +1,6 @@
 <?php
 
-namespace Lencse\ClassMap\Data;
+namespace Lencse\ClassMap\ClassData;
 
 use Iterator;
 

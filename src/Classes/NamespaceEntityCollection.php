@@ -1,8 +1,9 @@
 <?php
 
-namespace Lencse\ClassMap\Entity;
+namespace Lencse\ClassMap\Classes;
 
 use Iterator;
+use Lencse\ClassMap\Classes\NamespaceEntity;
 
 final class NamespaceEntityCollection implements Iterator
 {

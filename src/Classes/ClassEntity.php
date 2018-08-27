@@ -1,8 +1,12 @@
 <?php
 
-namespace Lencse\ClassMap\Entity;
+namespace Lencse\ClassMap\Classes;
 
-final class ClassEntity implements HasKey
+use Lencse\ClassMap\Classes\ClassEntityCollection;
+use Lencse\ClassMap\Classes\Entity;
+use Lencse\ClassMap\Classes\NamespaceEntity;
+
+final class ClassEntity implements Entity
 {
     /**
      * @var NamespaceEntity

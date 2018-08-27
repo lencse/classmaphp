@@ -2,8 +2,8 @@
 
 namespace Test\Unit\Entity;
 
-use Lencse\ClassMap\Entity\ClassEntity;
-use Lencse\ClassMap\Entity\NamespaceEntity;
+use Lencse\ClassMap\Classes\ClassEntity;
+use Lencse\ClassMap\Classes\NamespaceEntity;
 use PHPUnit\Framework\TestCase;
 
 abstract class ClassEntityTestBase extends TestCase

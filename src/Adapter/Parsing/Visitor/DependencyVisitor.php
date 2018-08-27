@@ -2,7 +2,7 @@
 
 namespace Lencse\ClassMap\Adapter\Parsing\Visitor;
 
-use Lencse\ClassMap\Data\StringList;
+use Lencse\ClassMap\ClassData\StringList;
 use PhpParser\Node;
 use PhpParser\Node\Stmt\Use_;
 use PhpParser\NodeVisitorAbstract;

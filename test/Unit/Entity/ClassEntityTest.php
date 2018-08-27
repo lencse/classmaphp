@@ -2,7 +2,7 @@
 
 namespace Test\Unit\Entity;
 
-use Lencse\ClassMap\Entity\ClassEntity;
+use Lencse\ClassMap\Classes\ClassEntity;
 
 class ClassEntityTest extends ClassEntityTestBase
 {
