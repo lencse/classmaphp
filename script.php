@@ -8,7 +8,6 @@ use League\Flysystem\Filesystem;
 use Lencse\ClassMap\Adapter\Parsing\Parser;
 use Lencse\ClassMap\Adapter\Processing\LocalFileSystemPackageProcessor;
 use Lencse\ClassMap\Classes\ClassEntity;
-use Lencse\ClassMap\Classes\NamespaceEntity;
 use Lencse\ClassMap\Classes\NamespaceRepository;
 use Lencse\ClassMap\Processing\ParsingFileProcessor;
 
