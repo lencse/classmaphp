@@ -13,7 +13,7 @@ class ParsingFileProcessorTest extends TestCase
 {
     public function testProcessing()
     {
-        $processor = new ParsingFileProcessor(new class implements Parser {
+        $processor = new ParsingFileProcessor(new class() implements Parser {
             public function parse(string $content): ClassDataList
             {
                 return  [

@@ -7,7 +7,6 @@ use League\Flysystem\Adapter\Local;
 use League\Flysystem\Filesystem;
 use Lencse\ClassMap\Adapter\Parsing\Parser;
 use Lencse\ClassMap\Adapter\Processing\LocalFileSystemPackageProcessor;
-use Lencse\ClassMap\ClassData\ClassDataList;
 use Lencse\ClassMap\Classes\ClassEntity;
 use Lencse\ClassMap\Classes\NamespaceEntity;
 use Lencse\ClassMap\Processing\ParsingFileProcessor;
@@ -25,7 +24,6 @@ $dirs = $composer['autoload']['psr-4'];
 $processor = new LocalFileSystemPackageProcessor(__DIR__);
 $fileProcessor = new ParsingFileProcessor(new Parser());
 $processor->processPhpFiles($fileProcessor);
-
 
 /** @var NamespaceEntity[] $namespaces */
 $namespaces = [];
