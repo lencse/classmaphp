@@ -2,8 +2,6 @@
 
 namespace Lencse\ClassMap\ClassData;
 
-use Lencse\ClassMap\ClassData\StringList;
-
 final class ClassData
 {
     /**

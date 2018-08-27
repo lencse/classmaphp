@@ -3,7 +3,6 @@
 namespace Lencse\ClassMap\ClassData;
 
 use Iterator;
-use Lencse\ClassMap\ClassData\ClassData;
 
 final class ClassDataList implements Iterator
 {
