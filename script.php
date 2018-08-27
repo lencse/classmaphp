@@ -8,6 +8,7 @@ use League\Flysystem\Filesystem;
 use Lencse\ClassMap\Adapter\Parsing\Parser;
 use Lencse\ClassMap\Adapter\Processing\LocalFileSystemPackageProcessor;
 use Lencse\ClassMap\Classes\ClassEntity;
+use Lencse\ClassMap\Classes\ClassRepository;
 use Lencse\ClassMap\Classes\NamespaceKey;
 use Lencse\ClassMap\Classes\NamespaceRepository;
 use Lencse\ClassMap\Processing\ParsingFileProcessor;
@@ -16,19 +17,13 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 ini_set('xdebug.max_nesting_level', 3000);
 
-$files = new Filesystem(new Local(__DIR__ /*. '/symfony'*/));
-
-$composer = json_decode($files->read('composer.json'), true);
-
-$dirs = $composer['autoload']['psr-4'];
-
+//$processor = new LocalFileSystemPackageProcessor(__DIR__ . '/symfony');
 $processor = new LocalFileSystemPackageProcessor(__DIR__);
 $fileProcessor = new ParsingFileProcessor(new Parser());
 $processor->processPhpFiles($fileProcessor);
 
 $namespaces = new NamespaceRepository();
-/** @var ClassEntity $classes */
-$classes = [];
+$classes = new ClassRepository();
 
 foreach ($fileProcessor->getClassDataList() as $classData) {
     $namespace = $namespaces->get(new NamespaceKey($classData->getNamespace()));
@@ -38,17 +33,9 @@ foreach ($fileProcessor->getClassDataList() as $classData) {
         $ns = implode('\\', array_slice($explode, 0, count($explode) - 1));
         $cl = array_pop($explode);
         $depNamespace = $namespaces->get(new NamespaceKey($ns));
-        $dpc = new ClassEntity($depNamespace, $cl);
-        if (!isset($classes[$dpc->getKey()])) {
-            $classes[$dpc->getKey()] = $dpc;
-        }
-        $depClasses[] = $classes[$dpc->getKey()];
+        $depClasses[] = $classes->get($depNamespace, $cl);
     }
-    $cla = new ClassEntity($namespace, $classData->getName());
-    if (!isset($classes[$cla->getKey()])) {
-        $classes[$cla->getKey()] = $cla;
-    }
-    $class = $classes[$cla->getKey()];
+    $class = $classes->get($namespace, $classData->getName());
     foreach ($depClasses as $depClass) {
         $class->addDependency($depClass);
     }

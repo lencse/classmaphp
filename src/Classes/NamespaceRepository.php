@@ -11,11 +11,12 @@ final class NamespaceRepository
 
     public function get(string $id): NamespaceEntity
     {
-        if (isset($this->namespaces[$id])) {
-            return $this->namespaces[$id];
+        $key = (string) new NamespaceKey($id);
+        if (isset($this->namespaces[$key])) {
+            return $this->namespaces[$key];
         }
 
-        return $this->namespaces[$id] = new NamespaceEntity($id);
+        return $this->namespaces[$key] = new NamespaceEntity($id);
     }
 
     public function getNamespaces(): NamespaceEntityCollection

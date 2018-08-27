@@ -45,7 +45,7 @@ final class ClassEntity implements Entity
 
     public function getKey(): string
     {
-        return "{$this->getNamespace()->getKey()}>{$this->getName()}";
+        return new ClassKey($this->namespace->getId(), $this->name);
     }
 
     public function getDependencies(): ClassEntityCollection
