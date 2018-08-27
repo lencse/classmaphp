@@ -9,6 +9,7 @@ use Lencse\ClassMap\Adapter\Parsing\Parser;
 use Lencse\ClassMap\ClassData\ClassDataList;
 use Lencse\ClassMap\Classes\ClassEntity;
 use Lencse\ClassMap\Classes\NamespaceEntity;
+use Lencse\ClassMap\Processing\PackageProcessor;
 
 require_once __DIR__ . '/vendor/autoload.php';
 
@@ -20,14 +21,12 @@ $composer = json_decode($files->read('composer.json'), true);
 
 $dirs = $composer['autoload']['psr-4'];
 
-$parser = new Parser();
-
-$classDataList = new ClassDataList();
+$processor = new PackageProcessor(new Parser());
 
 foreach ($dirs as $dir) {
     foreach ($files->listContents($dir, true) as $fileData) {
         if ('file' === $fileData['type'] && isset($fileData['extension']) && 'php' === $fileData['extension']) {
-            $classDataList = $classDataList->append($parser->parse($files->read($fileData['path'])));
+            $processor->process($files->read($fileData['path']));
         }
     }
 }
@@ -37,7 +36,7 @@ $namespaces = [];
 /** @var ClassEntity $classes */
 $classes = [];
 
-foreach ($classDataList as $classData) {
+foreach ($processor->getClassDataList() as $classData) {
     $namespace = new NamespaceEntity($classData->getNamespace());
     if (!isset($namespaces[$namespace->getKey()])) {
         $namespaces[$namespace->getKey()] = $namespace;
