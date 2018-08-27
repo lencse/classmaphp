@@ -56,7 +56,7 @@ class ParserTest extends TestCase
      */
     private function generateClassArrayFromFile(string $path): array
     {
-        $files = new Filesystem(new Local(__DIR__ . '/../../../fixtures'));
+        $files = new Filesystem(new Local(__DIR__ . '/../../../fixtures/files'));
         $parser = new Parser();
         $content = $files->read($path);
         $classes = $parser->parse($content);

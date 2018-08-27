@@ -6,10 +6,11 @@ namespace App;
 use League\Flysystem\Adapter\Local;
 use League\Flysystem\Filesystem;
 use Lencse\ClassMap\Adapter\Parsing\Parser;
+use Lencse\ClassMap\Adapter\Processing\LocalFileSystemPackageProcessor;
 use Lencse\ClassMap\ClassData\ClassDataList;
 use Lencse\ClassMap\Classes\ClassEntity;
 use Lencse\ClassMap\Classes\NamespaceEntity;
-use Lencse\ClassMap\Processing\PackageProcessor;
+use Lencse\ClassMap\Processing\ParsingFileProcessor;
 
 require_once __DIR__ . '/vendor/autoload.php';
 
@@ -21,22 +22,17 @@ $composer = json_decode($files->read('composer.json'), true);
 
 $dirs = $composer['autoload']['psr-4'];
 
-$processor = new PackageProcessor(new Parser());
+$processor = new LocalFileSystemPackageProcessor(__DIR__);
+$fileProcessor = new ParsingFileProcessor(new Parser());
+$processor->processPhpFiles($fileProcessor);
 
-foreach ($dirs as $dir) {
-    foreach ($files->listContents($dir, true) as $fileData) {
-        if ('file' === $fileData['type'] && isset($fileData['extension']) && 'php' === $fileData['extension']) {
-            $processor->process($files->read($fileData['path']));
-        }
-    }
-}
 
 /** @var NamespaceEntity[] $namespaces */
 $namespaces = [];
 /** @var ClassEntity $classes */
 $classes = [];
 
-foreach ($processor->getClassDataList() as $classData) {
+foreach ($fileProcessor->getClassDataList() as $classData) {
     $namespace = new NamespaceEntity($classData->getNamespace());
     if (!isset($namespaces[$namespace->getKey()])) {
         $namespaces[$namespace->getKey()] = $namespace;

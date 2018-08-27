@@ -6,14 +6,14 @@ use Lencse\ClassMap\ClassData\ClassData;
 use Lencse\ClassMap\ClassData\ClassDataList;
 use Lencse\ClassMap\ClassData\StringList;
 use Lencse\ClassMap\Parsing\Parser;
-use Lencse\ClassMap\Processing\PackageProcessor;
+use Lencse\ClassMap\Processing\ParsingFileProcessor;
 use PHPUnit\Framework\TestCase;
 
-class PackageProcessorTest extends TestCase
+class ParsingFileProcessorTest extends TestCase
 {
     public function testProcessing()
     {
-        $processor = new PackageProcessor(new class implements Parser {
+        $processor = new ParsingFileProcessor(new class implements Parser {
             public function parse(string $content): ClassDataList
             {
                 return  [
