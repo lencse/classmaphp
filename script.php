@@ -8,6 +8,7 @@ use League\Flysystem\Filesystem;
 use Lencse\ClassMap\Adapter\Parsing\Parser;
 use Lencse\ClassMap\Adapter\Processing\LocalFileSystemPackageProcessor;
 use Lencse\ClassMap\Classes\ClassEntity;
+use Lencse\ClassMap\Classes\NamespaceKey;
 use Lencse\ClassMap\Classes\NamespaceRepository;
 use Lencse\ClassMap\Processing\ParsingFileProcessor;
 
@@ -30,13 +31,13 @@ $namespaces = new NamespaceRepository();
 $classes = [];
 
 foreach ($fileProcessor->getClassDataList() as $classData) {
-    $namespace = $namespaces->get($classData->getNamespace());
+    $namespace = $namespaces->get(new NamespaceKey($classData->getNamespace()));
     $depClasses = [];
     foreach ($classData->getDependencies() as $dependency) {
         $explode = explode('\\', $dependency);
         $ns = implode('\\', array_slice($explode, 0, count($explode) - 1));
         $cl = array_pop($explode);
-        $depNamespace = $namespaces->get($ns);
+        $depNamespace = $namespaces->get(new NamespaceKey($ns));
         $dpc = new ClassEntity($depNamespace, $cl);
         if (!isset($classes[$dpc->getKey()])) {
             $classes[$dpc->getKey()] = $dpc;
@@ -52,8 +53,6 @@ foreach ($fileProcessor->getClassDataList() as $classData) {
         $class->addDependency($depClass);
     }
 }
-
-//echo 1;
 
 foreach ($namespaces->getNamespaces() as $namespace) {
     echo '\\'. $namespace->getId() . PHP_EOL;

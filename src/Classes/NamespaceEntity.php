@@ -32,7 +32,7 @@ final class NamespaceEntity implements Entity
 
     public function getKey(): string
     {
-        return $this->getId();
+        return new NamespaceKey($this->getId());
     }
 
     public function addSubClass(ClassEntity $class): void
