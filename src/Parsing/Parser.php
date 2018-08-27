@@ -6,5 +6,5 @@ use Lencse\ClassMap\ClassData\ClassDataList;
 
 interface Parser
 {
-    public function parseAndExtendClassList(string $content, ClassDataList $classes): ClassDataList;
+    public function parse(string $content): ClassDataList;
 }

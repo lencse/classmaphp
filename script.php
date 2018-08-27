@@ -27,7 +27,7 @@ $classDataList = new ClassDataList();
 foreach ($dirs as $dir) {
     foreach ($files->listContents($dir, true) as $fileData) {
         if ('file' === $fileData['type'] && isset($fileData['extension']) && 'php' === $fileData['extension']) {
-            $classDataList = $parser->parseAndExtendClassList($files->read($fileData['path']), $classDataList);
+            $classDataList = $classDataList->append($parser->parse($files->read($fileData['path'])));
         }
     }
 }

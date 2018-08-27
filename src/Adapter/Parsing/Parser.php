@@ -24,11 +24,11 @@ final class Parser implements ParserInterface
         $this->parser = (new ParserFactory())->create(ParserFactory::PREFER_PHP7);
     }
 
-    public function parseAndExtendClassList(string $content, ClassDataList $classes): ClassDataList
+    public function parse(string $content): ClassDataList
     {
         $statements = $this->parser->parse($content);
         if (empty($statements)) {
-            return $classes;
+            return new ClassDataList();
         }
 
         $classNameVisitor = new ClassNameVisitor();
@@ -42,10 +42,10 @@ final class Parser implements ParserInterface
 
         $traverser->traverse($statements);
         if (!$classNameVisitor->isClassDefinition() || '' === $namespaceVisitor->getNamespace()) {
-            return $classes;
+            return new ClassDataList();
         }
 
-        return $classes->add(new ClassData(
+        return (new ClassDataList())->add(new ClassData(
             $classNameVisitor->getClassName(),
             $namespaceVisitor->getNamespace(),
             $dependencyVisitor->getDependencies()

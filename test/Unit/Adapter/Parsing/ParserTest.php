@@ -60,7 +60,7 @@ class ParserTest extends TestCase
         $files = new Filesystem(new Local(__DIR__ . '/../../../fixtures'));
         $parser = new Parser();
         $content = $files->read($path);
-        $classes = $parser->parseAndExtendClassList($content, new ClassDataList());
+        $classes = $parser->parse($content);
 
         return iterator_to_array($classes);
     }

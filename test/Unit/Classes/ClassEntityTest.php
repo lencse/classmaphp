@@ -1,6 +1,6 @@
 <?php
 
-namespace Test\Unit\Entity;
+namespace Test\Unit\Classes;
 
 use Lencse\ClassMap\Classes\ClassEntity;
 
