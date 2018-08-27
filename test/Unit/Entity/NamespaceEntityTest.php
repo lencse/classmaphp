@@ -3,7 +3,6 @@
 namespace Test\Unit\Entity;
 
 use Lencse\ClassMap\Entity\NamespaceEntity;
-use Lencse\ClassMap\Entity\PackageEntity;
 use PHPUnit\Framework\TestCase;
 
 class NamespaceEntityTest extends TestCase
