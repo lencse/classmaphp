@@ -11,10 +11,10 @@ final class StringList implements Iterator
      */
     private $strings = [];
 
-    public function add(string $class): self
+    public function add(string $str): self
     {
         $result = clone $this;
-        $result->strings[] = $class;
+        $result->strings[] = $str;
 
         return $result;
     }

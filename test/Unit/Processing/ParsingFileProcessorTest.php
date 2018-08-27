@@ -4,6 +4,7 @@ namespace Test\Unit\Processing;
 
 use Lencse\ClassMap\ClassData\ClassData;
 use Lencse\ClassMap\ClassData\StringList;
+use Lencse\ClassMap\Classes\NamespaceEntity;
 use Lencse\ClassMap\Parsing\ClassDataHandler;
 use Lencse\ClassMap\Parsing\Parser;
 use Lencse\ClassMap\Processing\ParsingFileProcessor;
@@ -17,10 +18,12 @@ class ParsingFileProcessorTest extends TestCase
             public function parse(string $content, ClassDataHandler $handler): void
             {
                 if ('content1' === $content) {
-                    $handler->handle(new ClassData('Class1', '', new StringList()));
+                    $handler->handle(
+                        new ClassData('Class1', 'Namespace1', (new StringList())->add('Namespace3\Class1'))
+                    );
                 }
                 if ('content2' === $content) {
-                    $handler->handle(new ClassData('Class2', '', new StringList()));
+                    $handler->handle(new ClassData('Class2', 'Namespace2', new StringList()));
                 }
             }
         });
@@ -28,7 +31,11 @@ class ParsingFileProcessorTest extends TestCase
         $processor->process('content2');
         $processor->process('content3');
 
-        $expected = [new ClassData('Class1', '', new StringList()), new ClassData('Class2', '', new StringList())];
-        $this->assertEquals($expected, iterator_to_array($processor->getClassDataList()));
+        /** @var NamespaceEntity[] $arr */
+        $arr = iterator_to_array($processor->getNamespaceRepository()->getNamespaces());
+        $this->assertEquals('Namespace1', $arr['Namespace1']->getId());
+        $this->assertEquals('Namespace2', $arr['Namespace2']->getId());
+        $this->assertEquals('Namespace3', $arr['Namespace3']->getId());
+        $this->assertEquals(1, $arr['Namespace3']->getSubClasses()->count());
     }
 }
