@@ -2,7 +2,6 @@
 
 namespace Lencse\ClassMap\Adapter\Parsing;
 
-use Lencse\ClassMap\Adapter\Parsing\Visitor\ClassNameVisitor;
 use Lencse\ClassMap\Adapter\Parsing\Visitor\DependencyVisitor;
 use Lencse\ClassMap\Adapter\Parsing\Visitor\NamespaceVisitor;
 use Lencse\ClassMap\ClassData\FileInfo;
