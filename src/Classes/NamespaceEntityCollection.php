@@ -2,9 +2,10 @@
 
 namespace Lencse\ClassMap\Classes;
 
+use Countable;
 use Iterator;
 
-final class NamespaceEntityCollection implements Iterator
+final class NamespaceEntityCollection implements Iterator, Countable
 {
     /**
      * @var NamespaceEntity[]
@@ -46,5 +47,10 @@ final class NamespaceEntityCollection implements Iterator
     public function rewind(): void
     {
         reset($this->namespaces);
+    }
+
+    public function count()
+    {
+        return count($this->namespaces);
     }
 }

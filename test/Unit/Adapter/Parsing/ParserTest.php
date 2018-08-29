@@ -5,7 +5,7 @@ namespace Test\Unit\Adapter\Parsing;
 use League\Flysystem\Adapter\Local;
 use League\Flysystem\Filesystem;
 use Lencse\ClassMap\Adapter\Parsing\Parser;
-use Lencse\ClassMap\ClassData\ClassData;
+use Lencse\ClassMap\ClassData\FileInfo;
 use Lencse\ClassMap\ClassData\StringList;
 use Lencse\ClassMap\Parsing\ClassDataHandler;
 use PHPUnit\Framework\TestCase;
@@ -13,14 +13,13 @@ use PHPUnit\Framework\TestCase;
 class ParserTest extends TestCase implements ClassDataHandler
 {
     /**
-     * @var ClassData[]
+     * @var FileInfo[]
      */
     private $classes = [];
 
     public function testParsingClassWithoutDependencies()
     {
         $classes = $this->generateClassArrayFromFile('EventDispatcher.php');
-        $this->assertEquals('EventDispatcher', $classes[0]->getName());
         $this->assertEquals('Symfony\\Component\\EventDispatcher', $classes[0]->getNamespace());
         $this->assertEquals(new StringList(), $classes[0]->getDependencies());
     }
@@ -28,7 +27,6 @@ class ParserTest extends TestCase implements ClassDataHandler
     public function testParsingClassWthDependencies()
     {
         $classes = $this->generateClassArrayFromFile('ExpressionLanguage.php');
-        $this->assertEquals('ExpressionLanguage', $classes[0]->getName());
         $this->assertEquals('Symfony\\Component\\DependencyInjection', $classes[0]->getNamespace());
         $expected = [
             'Psr\\Cache\\CacheItemPoolInterface',
@@ -55,7 +53,7 @@ class ParserTest extends TestCase implements ClassDataHandler
         $this->assertEmpty($classes);
     }
 
-    public function handle(ClassData $classData): void
+    public function handle(FileInfo $classData): void
     {
         $this->classes[] = $classData;
     }
@@ -63,7 +61,7 @@ class ParserTest extends TestCase implements ClassDataHandler
     /**
      * @param string $path
      *
-     * @return ClassData[]
+     * @return FileInfo[]
      */
     private function generateClassArrayFromFile(string $path): array
     {

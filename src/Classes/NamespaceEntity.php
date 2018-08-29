@@ -2,7 +2,7 @@
 
 namespace Lencse\ClassMap\Classes;
 
-final class NamespaceEntity implements Entity
+final class NamespaceEntity
 {
     /**
      * @var string
@@ -10,14 +10,14 @@ final class NamespaceEntity implements Entity
     private $id;
 
     /**
-     * @var ClassEntityCollection
+     * @var NamespaceEntityCollection
      */
-    private $subClasses;
+    private $dependencies;
 
     public function __construct(string $id)
     {
         $this->id = $id;
-        $this->subClasses = new ClassEntityCollection();
+        $this->dependencies = new NamespaceEntityCollection();
     }
 
     public function getId(): string
@@ -35,25 +35,13 @@ final class NamespaceEntity implements Entity
         return new NamespaceKey($this->getId());
     }
 
-    public function addSubClass(ClassEntity $class): void
+    public function addDependency(self $dependency): void
     {
-        $this->subClasses->add($class);
+        $this->dependencies->add($dependency);
     }
 
-    public function getSubClasses(): ClassEntityCollection
+    public function getDependencies(): NamespaceEntityCollection
     {
-        return $this->subClasses;
-    }
-
-    public function getNamespaceDependencies(): NamespaceEntityCollection
-    {
-        $result = new NamespaceEntityCollection();
-        foreach ($this->getSubClasses() as $subClass) {
-            foreach ($subClass->getDependencies() as $dependency) {
-                $result->add($dependency->getNamespace());
-            }
-        }
-
-        return $result;
+        return $this->dependencies;
     }
 }

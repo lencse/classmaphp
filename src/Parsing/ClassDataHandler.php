@@ -2,9 +2,9 @@
 
 namespace Lencse\ClassMap\Parsing;
 
-use Lencse\ClassMap\ClassData\ClassData;
+use Lencse\ClassMap\ClassData\FileInfo;
 
 interface ClassDataHandler
 {
-    public function handle(ClassData $classData): void;
+    public function handle(FileInfo $classData): void;
 }

@@ -5,7 +5,7 @@ namespace Lencse\ClassMap\Adapter\Parsing;
 use Lencse\ClassMap\Adapter\Parsing\Visitor\ClassNameVisitor;
 use Lencse\ClassMap\Adapter\Parsing\Visitor\DependencyVisitor;
 use Lencse\ClassMap\Adapter\Parsing\Visitor\NamespaceVisitor;
-use Lencse\ClassMap\ClassData\ClassData;
+use Lencse\ClassMap\ClassData\FileInfo;
 use Lencse\ClassMap\Parsing\ClassDataHandler;
 use Lencse\ClassMap\Parsing\Parser as ParserInterface;
 use PhpParser\NodeTraverser;
@@ -31,22 +31,20 @@ final class Parser implements ParserInterface
             return;
         }
 
-        $classNameVisitor = new ClassNameVisitor();
         $namespaceVisitor = new NamespaceVisitor();
         $dependencyVisitor = new DependencyVisitor();
 
         $traverser = new NodeTraverser();
-        foreach ([$classNameVisitor, $namespaceVisitor, $dependencyVisitor] as $visitor) {
+        foreach ([$namespaceVisitor, $dependencyVisitor] as $visitor) {
             $traverser->addVisitor($visitor);
         }
 
         $traverser->traverse($statements);
-        if (!$classNameVisitor->isClassDefinition() || '' === $namespaceVisitor->getNamespace()) {
+        if ('' === $namespaceVisitor->getNamespace()) {
             return;
         }
 
-        $handler->handle(new ClassData(
-            $classNameVisitor->getClassName(),
+        $handler->handle(new FileInfo(
             $namespaceVisitor->getNamespace(),
             $dependencyVisitor->getDependencies()
         ));

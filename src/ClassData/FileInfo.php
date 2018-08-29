@@ -2,13 +2,8 @@
 
 namespace Lencse\ClassMap\ClassData;
 
-final class ClassData
+final class FileInfo
 {
-    /**
-     * @var string
-     */
-    private $name;
-
     /**
      * @var string
      */
@@ -19,16 +14,10 @@ final class ClassData
      */
     private $dependencies;
 
-    public function __construct(string $name, string $namespace, StringList $dependencies)
+    public function __construct(string $namespace, StringList $dependencies)
     {
-        $this->name = $name;
         $this->namespace = $namespace;
         $this->dependencies = $dependencies;
-    }
-
-    public function getName(): string
-    {
-        return $this->name;
     }
 
     public function getNamespace(): string
