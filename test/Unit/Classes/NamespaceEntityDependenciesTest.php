@@ -2,7 +2,6 @@
 
 namespace Test\Unit\Classes;
 
-use Lencse\ClassMap\Classes\ClassEntity;
 use Lencse\ClassMap\Classes\NamespaceEntity;
 use PHPUnit\Framework\TestCase;
 
