@@ -2,17 +2,14 @@
 
 namespace Lencse\ClassMap\Classes;
 
-use Countable;
-use Iterator;
-
-final class NamespaceEntityCollection implements Iterator, Countable
+final class NamespaceEntityCollection implements PHPNamespaceList
 {
     /**
-     * @var NamespaceEntity[]
+     * @var PHPNamespace[]
      */
     private $namespaces = [];
 
-    public function add(NamespaceEntity $namespace): void
+    public function add(PHPNamespace $namespace): void
     {
         if (isset($this->namespaces[$namespace->getKey()])) {
             return;
@@ -21,22 +18,22 @@ final class NamespaceEntityCollection implements Iterator, Countable
         $this->namespaces[$namespace->getKey()] = $namespace;
     }
 
-    public function current(): NamespaceEntity
+    public function current(): PHPNamespace
     {
         return current($this->namespaces);
     }
 
     /**
-     * @return false|NamespaceEntity
+     * @return false|PHPNamespace
      */
     public function next()
     {
         return next($this->namespaces);
     }
 
-    public function key()
+    public function key(): string
     {
-        return key($this->namespaces);
+        return (string) key($this->namespaces);
     }
 
     public function valid(): bool
@@ -49,7 +46,7 @@ final class NamespaceEntityCollection implements Iterator, Countable
         reset($this->namespaces);
     }
 
-    public function count()
+    public function count(): int
     {
         return count($this->namespaces);
     }
