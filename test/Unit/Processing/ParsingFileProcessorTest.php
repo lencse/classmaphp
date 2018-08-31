@@ -33,9 +33,9 @@ class ParsingFileProcessorTest extends TestCase
 
         /** @var NamespaceEntity[] $arr */
         $arr = iterator_to_array($processor->getNamespaceRepository()->getNamespaces());
-        $this->assertEquals('Namespace1', $arr['Namespace1']->getId());
-        $this->assertEquals('Namespace2', $arr['Namespace2']->getId());
-        $this->assertEquals('Namespace3', $arr['Namespace3']->getId());
+        $this->assertEquals('Namespace1', $arr['Namespace1']->getName());
+        $this->assertEquals('Namespace2', $arr['Namespace2']->getName());
+        $this->assertEquals('Namespace3', $arr['Namespace3']->getName());
         $this->assertEquals(
             ['Namespace3' => $arr['Namespace3']],
             iterator_to_array($arr['Namespace1']->getDependencies())

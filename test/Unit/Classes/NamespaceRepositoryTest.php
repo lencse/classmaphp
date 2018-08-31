@@ -12,7 +12,7 @@ class NamespaceRepositoryTest extends TestCase
     {
         $repo = new NamespaceRepository();
         $namespace = $repo->get('Test');
-        $this->assertEquals('Test', $namespace->getId());
+        $this->assertEquals('Test', $namespace->getName());
         $this->assertSame($namespace, $repo->get('Test'));
     }
 
