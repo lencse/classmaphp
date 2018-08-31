@@ -32,7 +32,7 @@ final class NamespaceEntity
 
     public function getKey(): string
     {
-        return new NamespaceKey($this->getId());
+        return $this->getId();
     }
 
     public function addDependency(self $dependency): void
