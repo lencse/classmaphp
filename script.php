@@ -15,7 +15,7 @@ ini_set('xdebug.max_nesting_level', 3000);
 $fileProcessor = new ParsingFileProcessor(new Parser());
 (new LocalFileSystemPackageProcessor(__DIR__))->processPhpFiles($fileProcessor);
 
-foreach ($fileProcessor->getNamespaceRepository()->getNamespaces() as $namespace) {
+foreach ($fileProcessor->getNamespaces() as $namespace) {
     echo '\\'. $namespace->getName() . PHP_EOL;
     foreach ($namespace->getDependencies() as $dependency) {
         echo '    \\' . $dependency->getName() . PHP_EOL;

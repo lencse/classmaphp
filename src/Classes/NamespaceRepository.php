@@ -5,11 +5,11 @@ namespace Lencse\ClassMap\Classes;
 final class NamespaceRepository
 {
     /**
-     * @var NamespaceEntity[]
+     * @var PHPNamespace[]
      */
     private $namespaces = [];
 
-    public function get(string $id): NamespaceEntity
+    public function get(string $id): PHPNamespace
     {
         if (isset($this->namespaces[$id])) {
             return $this->namespaces[$id];
@@ -18,7 +18,7 @@ final class NamespaceRepository
         return $this->namespaces[$id] = new NamespaceEntity($id);
     }
 
-    public function getNamespaces(): NamespaceEntityCollection
+    public function getNamespaces(): PHPNamespaceList
     {
         $result = new NamespaceEntityCollection();
         foreach ($this->namespaces as $namespace) {

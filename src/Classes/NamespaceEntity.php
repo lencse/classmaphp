@@ -30,7 +30,7 @@ final class NamespaceEntity implements PHPNamespace
         return $this->getName();
     }
 
-    public function addDependency(self $dependency): void
+    public function addDependency(PHPNamespace $dependency): void
     {
         $this->dependencies->add($dependency);
     }
