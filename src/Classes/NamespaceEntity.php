@@ -7,32 +7,27 @@ final class NamespaceEntity
     /**
      * @var string
      */
-    private $id;
+    private $name;
 
     /**
      * @var NamespaceEntityCollection
      */
     private $dependencies;
 
-    public function __construct(string $id)
+    public function __construct(string $name)
     {
-        $this->id = $id;
+        $this->name = $name;
         $this->dependencies = new NamespaceEntityCollection();
     }
 
-    public function getId(): string
+    public function getName(): string
     {
-        return $this->id;
-    }
-
-    public function same(self $other): bool
-    {
-        return $other->getId() === $this->getId();
+        return $this->name;
     }
 
     public function getKey(): string
     {
-        return $this->getId();
+        return $this->getName();
     }
 
     public function addDependency(self $dependency): void
