@@ -25,11 +25,15 @@ class ParsingFileProcessorTest extends TestCase
                 if ('content2' === $content) {
                     $handler->handle(new FileInfo('Namespace2', new StringList()));
                 }
+                if ('content4' === $content) {
+                    $handler->handle(new FileInfo('Namespace4', (new StringList())->add('\\ClassInRoot')));
+                }
             }
         });
         $processor->process('content1');
         $processor->process('content2');
         $processor->process('content3');
+        $processor->process('content4');
 
         /** @var NamespaceEntity[] $arr */
         $arr = iterator_to_array($processor->getNamespaces());
@@ -39,6 +43,10 @@ class ParsingFileProcessorTest extends TestCase
         $this->assertEquals(
             ['Namespace3' => $arr['Namespace3']],
             iterator_to_array($arr['Namespace1']->getDependencies())
+        );
+        $this->assertEquals(
+            ['\\' => $arr['\\']],
+            iterator_to_array($arr['Namespace4']->getDependencies())
         );
     }
 }

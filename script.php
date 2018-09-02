@@ -16,8 +16,8 @@ $fileProcessor = new ParsingFileProcessor(new Parser());
 (new LocalFileSystemPackageProcessor(__DIR__))->processPhpFiles($fileProcessor);
 
 foreach ($fileProcessor->getNamespaces() as $namespace) {
-    echo '\\'. $namespace->getName() . PHP_EOL;
+    echo $namespace->getName() . PHP_EOL;
     foreach ($namespace->getDependencies() as $dependency) {
-        echo '    \\' . $dependency->getName() . PHP_EOL;
+        echo '    ' . $dependency->getName() . PHP_EOL;
     }
 }

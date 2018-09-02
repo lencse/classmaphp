@@ -20,17 +20,26 @@ class ParserTest extends TestCase implements ClassDataHandler
     public function testParsingClassWithoutDependencies()
     {
         $classes = $this->generateClassArrayFromFile('EventDispatcher.php');
-        $this->assertEquals('Symfony\\Component\\EventDispatcher', $classes[0]->getNamespace());
+        $this->assertEquals('\\Symfony\\Component\\EventDispatcher', $classes[0]->getNamespace());
         $this->assertEquals(new StringList(), $classes[0]->getDependencies());
     }
 
     public function testParsingClassWthDependencies()
     {
         $classes = $this->generateClassArrayFromFile('ExpressionLanguage.php');
-        $this->assertEquals('Symfony\\Component\\DependencyInjection', $classes[0]->getNamespace());
+        $this->assertEquals('\\Symfony\\Component\\DependencyInjection', $classes[0]->getNamespace());
         $expected = [
-            'Psr\\Cache\\CacheItemPoolInterface',
-            'Symfony\\Component\\ExpressionLanguage\\ExpressionLanguage',
+            '\\Psr\\Cache\\CacheItemPoolInterface',
+            '\\Symfony\\Component\\ExpressionLanguage\\ExpressionLanguage',
+        ];
+        $this->assertEquals($expected, iterator_to_array($classes[0]->getDependencies()));
+    }
+
+    public function testParsingClassWthDependenciesInRootNamespace()
+    {
+        $classes = $this->generateClassArrayFromFile('StringList.php');
+        $expected = [
+            '\Iterator',
         ];
         $this->assertEquals($expected, iterator_to_array($classes[0]->getDependencies()));
     }

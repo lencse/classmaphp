@@ -22,7 +22,9 @@ final class DependencyVisitor extends NodeVisitorAbstract
     public function enterNode(Node $node)
     {
         if ($node instanceof Use_) {
-            $this->dependencies = $this->dependencies->add(implode('\\', $node->uses[0]->name->parts));
+            $this->dependencies = $this->dependencies->add(
+                implode('\\', array_merge([''], $node->uses[0]->name->parts))
+            );
         }
     }
 

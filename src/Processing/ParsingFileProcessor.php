@@ -37,6 +37,9 @@ final class ParsingFileProcessor implements FileProcessor, ClassDataHandler
         foreach ($classData->getDependencies() as $dependency) {
             $parts = explode('\\', $dependency);
             $depNamespaceId = implode('\\', array_slice($parts, 0, count($parts) - 1));
+            if ('' === $depNamespaceId) {
+                $depNamespaceId = '\\';
+            }
             $depNamespace = $this->namespaceRepository->get($depNamespaceId);
             $namespace->addDependency($depNamespace);
         }

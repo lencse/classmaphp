@@ -16,7 +16,7 @@ final class NamespaceVisitor extends NodeVisitorAbstract
     public function enterNode(Node $node)
     {
         if ($node instanceof Namespace_) {
-            $this->namespace = (string) $node->name;
+            $this->namespace = '\\' . (string) $node->name;
         }
     }
 
