@@ -2,7 +2,7 @@
 
 namespace Lencse\ClassMap\Classes;
 
-final class NamespaceEntity implements PHPNamespace
+final class NamespaceEntity
 {
     /**
      * @var string
@@ -30,12 +30,12 @@ final class NamespaceEntity implements PHPNamespace
         return $this->getName();
     }
 
-    public function addDependency(PHPNamespace $dependency): void
+    public function addDependency(NamespaceEntity $dependency): void
     {
         $this->dependencies->add($dependency);
     }
 
-    public function getDependencies(): PHPNamespaceList
+    public function getDependencies(): NamespaceEntityCollection
     {
         return $this->dependencies;
     }

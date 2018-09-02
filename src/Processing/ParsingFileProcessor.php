@@ -3,8 +3,8 @@
 namespace Lencse\ClassMap\Processing;
 
 use Lencse\ClassMap\ClassData\FileInfo;
+use Lencse\ClassMap\Classes\NamespaceEntityCollection;
 use Lencse\ClassMap\Classes\NamespaceRepository;
-use Lencse\ClassMap\Classes\PHPNamespaceList;
 use Lencse\ClassMap\Parsing\ClassDataHandler;
 use Lencse\ClassMap\Parsing\Parser;
 
@@ -42,7 +42,7 @@ final class ParsingFileProcessor implements FileProcessor, ClassDataHandler
         }
     }
 
-    public function getNamespaces(): PHPNamespaceList
+    public function getNamespaces(): NamespaceEntityCollection
     {
         return $this->namespaceRepository->getNamespaces();
     }
