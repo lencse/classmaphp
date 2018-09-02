@@ -12,7 +12,7 @@ final class Dependency
     /**
      * @var int
      */
-    private $cardinality ;
+    private $cardinality;
 
     public function __construct(NamespaceEntity $dependencyNamespace, int $cardinality = 1)
     {
@@ -33,7 +33,7 @@ final class Dependency
     public function incremented(): self
     {
         $result = clone $this;
-        ++$result->cardinality;
+        $result->cardinality++;
 
         return $result;
     }
