@@ -30,7 +30,7 @@ final class NamespaceEntity
         return $this->getName();
     }
 
-    public function addDependency(NamespaceEntity $dependency): void
+    public function addDependency(self $dependency): void
     {
         $this->dependencies->add($dependency);
     }
