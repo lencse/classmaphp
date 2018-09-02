@@ -10,14 +10,14 @@ final class NamespaceEntity
     private $name;
 
     /**
-     * @var NamespaceEntityCollection
+     * @var DependencyCollection
      */
     private $dependencies;
 
     public function __construct(string $name)
     {
         $this->name = $name;
-        $this->dependencies = new NamespaceEntityCollection();
+        $this->dependencies = new DependencyCollection();
     }
 
     public function getName(): string
@@ -32,10 +32,10 @@ final class NamespaceEntity
 
     public function addDependency(self $dependency): void
     {
-        $this->dependencies->add($dependency);
+        $this->dependencies->addNamespaceDependency($dependency);
     }
 
-    public function getDependencies(): NamespaceEntityCollection
+    public function getDependencies(): DependencyCollection
     {
         return $this->dependencies;
     }

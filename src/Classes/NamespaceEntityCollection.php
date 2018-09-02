@@ -5,7 +5,7 @@ namespace Lencse\ClassMap\Classes;
 use Countable;
 use Iterator;
 
-final class NamespaceEntityCollection implements Iterator, Countable
+final class NamespaceEntityCollection implements Iterator
 {
     /**
      * @var NamespaceEntity[]
@@ -14,10 +14,6 @@ final class NamespaceEntityCollection implements Iterator, Countable
 
     public function add(NamespaceEntity $namespace): void
     {
-        if (isset($this->namespaces[$namespace->getKey()])) {
-            return;
-        }
-
         $this->namespaces[$namespace->getKey()] = $namespace;
     }
 
@@ -47,10 +43,5 @@ final class NamespaceEntityCollection implements Iterator, Countable
     public function rewind(): void
     {
         reset($this->namespaces);
-    }
-
-    public function count(): int
-    {
-        return count($this->namespaces);
     }
 }

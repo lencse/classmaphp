@@ -2,6 +2,7 @@
 
 namespace Test\Unit\Classes;
 
+use Lencse\ClassMap\Classes\Dependency;
 use Lencse\ClassMap\Classes\NamespaceEntity;
 use PHPUnit\Framework\TestCase;
 
@@ -31,7 +32,7 @@ class NamespaceEntityDependenciesTest extends TestCase
     public function testOneNamespaceDependency()
     {
         $this->addDependency(0, 1);
-        $this->assertNamespaceDependencies([1], 0);
+        $this->assertNamespaceDependencies([1 => 1], 0);
     }
 
     public function testNamespaceDependencies()
@@ -49,10 +50,10 @@ class NamespaceEntityDependenciesTest extends TestCase
         $this->addDependency(3, 0);
         $this->addDependency(4, 2);
 
-        $this->assertNamespaceDependencies([1, 2], 0);
-        $this->assertNamespaceDependencies([2], 1);
-        $this->assertNamespaceDependencies([0, 2], 3);
-        $this->assertNamespaceDependencies([2], 4);
+        $this->assertNamespaceDependencies([1 => 2, 2 => 1], 0);
+        $this->assertNamespaceDependencies([2 => 1], 1);
+        $this->assertNamespaceDependencies([0 => 1, 2 => 6], 3);
+        $this->assertNamespaceDependencies([2 => 1], 4);
     }
 
     private function addDependency(int $dependentIdx, int $dependencyIdx): void
@@ -67,9 +68,9 @@ class NamespaceEntityDependenciesTest extends TestCase
     private function assertNamespaceDependencies(array $expectedIdx, int $dependentIdx): void
     {
         $expectedArr = [];
-        foreach ($expectedIdx as $idx) {
+        foreach ($expectedIdx as $idx => $cardinality) {
             $namespace = $this->namespaces[$idx];
-            $expectedArr[$namespace->getKey()] = $namespace;
+            $expectedArr[$namespace->getKey()] = new Dependency($namespace, $cardinality);
         }
         $this->assertEquals(
             $expectedArr,

@@ -4,6 +4,7 @@ namespace Test\Unit\Processing;
 
 use Lencse\ClassMap\ClassData\FileInfo;
 use Lencse\ClassMap\ClassData\StringList;
+use Lencse\ClassMap\Classes\Dependency;
 use Lencse\ClassMap\Classes\NamespaceEntity;
 use Lencse\ClassMap\Parsing\ClassDataHandler;
 use Lencse\ClassMap\Parsing\Parser;
@@ -19,7 +20,10 @@ class ParsingFileProcessorTest extends TestCase
             {
                 if ('content1' === $content) {
                     $handler->handle(
-                        new FileInfo('Namespace1', (new StringList())->add('Namespace3\Class1'))
+                        new FileInfo(
+                            'Namespace1',
+                            (new StringList())->add('Namespace3\Class1')->add('Namespace4\Class1')
+                        )
                     );
                 }
                 if ('content2' === $content) {
@@ -41,11 +45,14 @@ class ParsingFileProcessorTest extends TestCase
         $this->assertEquals('Namespace2', $arr['Namespace2']->getName());
         $this->assertEquals('Namespace3', $arr['Namespace3']->getName());
         $this->assertEquals(
-            ['Namespace3' => $arr['Namespace3']],
+            [
+                'Namespace3' => new Dependency($arr['Namespace3'], 1),
+                'Namespace4' => new Dependency($arr['Namespace4'], 1)
+            ],
             iterator_to_array($arr['Namespace1']->getDependencies())
         );
         $this->assertEquals(
-            ['\\' => $arr['\\']],
+            ['\\' => new Dependency($arr['\\'], 1)],
             iterator_to_array($arr['Namespace4']->getDependencies())
         );
     }
