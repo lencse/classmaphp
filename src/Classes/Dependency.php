@@ -20,7 +20,7 @@ final class Dependency
         $this->cardinality = $cardinality;
     }
 
-    public function getDependencyNamespace(): NamespaceEntity
+    public function getNamespace(): NamespaceEntity
     {
         return $this->dependencyNamespace;
     }

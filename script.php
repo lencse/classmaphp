@@ -18,6 +18,6 @@ $fileProcessor = new ParsingFileProcessor(new Parser());
 foreach ($fileProcessor->getNamespaces() as $namespace) {
     echo $namespace->getName() . PHP_EOL;
     foreach ($namespace->getDependencies() as $dependency) {
-        echo sprintf('    %s (%d)', $dependency->getDependencyNamespace()->getName(), $dependency->getCardinality()) . PHP_EOL;
+        echo sprintf('    %s (%d)', $dependency->getNamespace()->getName(), $dependency->getCardinality()) . PHP_EOL;
     }
 }
