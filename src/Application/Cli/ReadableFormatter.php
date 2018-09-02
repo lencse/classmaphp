@@ -2,7 +2,6 @@
 
 namespace Lencse\ClassMap\Application\Cli;
 
-use Aura\Cli\Stdio;
 use Lencse\ClassMap\Classes\NamespaceEntityCollection;
 
 class ReadableFormatter implements Formatter
