@@ -1,2 +1,5 @@
 parameters:
     bootstrap: vendor/autoload.php
+
+    excludes_analyse:
+        - test/Unit/Adapter/Application/Cli/AuraOutputTest.php

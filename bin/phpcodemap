@@ -21,5 +21,4 @@ ini_set('xdebug.max_nesting_level', 3000);
 
 $fileProcessor = new ParsingFileProcessor(new Parser());
 (new LocalFileSystemPackageProcessor($dir))->processPhpFiles($fileProcessor);
-
 (new ReadableFormatter())->print($fileProcessor->getNamespaces(), new AuraOutput($cliFactory->newStdio()));

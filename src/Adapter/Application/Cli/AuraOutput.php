@@ -5,9 +5,6 @@ namespace Lencse\ClassMap\Adapter\Application\Cli;
 use Aura\Cli\Stdio;
 use Lencse\ClassMap\Application\Cli\Output;
 
-/**
- * @codeCoverageIgnore
- */
 class AuraOutput implements Output
 {
     /**
